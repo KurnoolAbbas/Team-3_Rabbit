@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 31427314}
   - component: {fileID: 31427313}
   m_Layer: 0
-  m_Name: Text (Legacy)
+  m_Name: numDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,16 +149,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31427311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 101}
+  m_LocalPosition: {x: 0, y: 0, z: -122}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1681206131}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 10}
-  m_SizeDelta: {x: 100, y: 1000}
+  m_AnchorMin: {x: 0.1921875, y: 0.26072094}
+  m_AnchorMax: {x: 0.6154999, y: 0.7381279}
+  m_AnchoredPosition: {x: 26, y: -10}
+  m_SizeDelta: {x: -71, y: 671}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &31427313
 MonoBehaviour:
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 1305101050}
   - component: {fileID: 1305101049}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: loadingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 1681206130}
   - component: {fileID: 1681206129}
   m_Layer: 0
-  m_Name: bar11
+  m_Name: numPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -755,8 +755,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: -1000, y: -1600}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: -800, y: -2400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1787210570
 GameObject:
@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 1787210572}
   - component: {fileID: 1787210573}
   m_Layer: 0
-  m_Name: loading
+  m_Name: loadingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
