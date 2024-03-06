@@ -2,42 +2,49 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class mulLogic : MonoBehaviour
 {
-
-    
     public Text lastText;
     public Text result;
-
     public Text questionText;
     public Button[] optionButtons;
     public Text questionCounterText;
+    public GameObject pauseMenuPanel; // Reference to your pause menu panel
 
     private int currentQuestionIndex = 0;
     private int correctAnswersCount = 0;
     private int totalQuestions = 5;
     private int[] answerPositions = { 0, 1, 2 };
+    private int previousCorrectOption = -1;
+    private bool gamePaused = false;
+    private bool gameEnded = false;
 
     private void Start()
     {
         DisplayNextQuestion();
     }
 
-    
     private void DisplayNextQuestion()
     {
         if (currentQuestionIndex >= totalQuestions)
         {
             // Game over
+            pauseMenuPanel.SetActive(false);
             lastText.text = "Game Over :)";
-            result.text = "Correct: " + correctAnswersCount + "/" + totalQuestions;
+            DisplayFinalResult();
             DisableOptionButtons();
             return;
         }
 
-        int num1 = Random.Range(1, 11);
-        int num2 = Random.Range(1, 11);
+        int num1, num2;
+        do
+        {
+            num1 = Random.Range(1, 11);
+            num2 = Random.Range(1, 11);
+        } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
+
+        previousCorrectOption = num1 * num2;
+
         int correctAnswer = num1 * num2;
 
         questionText.text = num1 + " * " + num2 + " = ?";
@@ -52,14 +59,20 @@ public class mulLogic : MonoBehaviour
             }
             else
             {
-                int randomAnswer = Random.Range(1, 101); // Generate random wrong answers
+                int randomAnswer;
+                do
+                {
+                    randomAnswer = Random.Range(1, 101); // Generate random wrong answers
+                } while (randomAnswer == correctAnswer || AnswerExists(randomAnswer));
+
                 optionButtons[i].GetComponentInChildren<Text>().text = randomAnswer.ToString();
             }
         }
 
         questionCounterText.text = (currentQuestionIndex + 1) + "/" + totalQuestions;
-    }
 
+        EnableOptionButtons(); // Ensure buttons are enabled for each question
+    }
 
     private void ShuffleAnswerPositions()
     {
@@ -72,35 +85,51 @@ public class mulLogic : MonoBehaviour
         }
     }
 
+    private bool AnswerExists(int answer)
+    {
+        foreach (Button button in optionButtons)
+        {
+            if (button.GetComponentInChildren<Text>().text == answer.ToString())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void CheckAnswer(int selectedAnswerIndex)
     {
-        
+        if (gameEnded || gamePaused)
+            return; // If the game is paused or ended, do not process answer
+
         int correctAnswerIndex = answerPositions[0];
-        if (selectedAnswerIndex == correctAnswerIndex)
+        bool isCorrect = selectedAnswerIndex == correctAnswerIndex;
+
+        if (isCorrect)
         {
             result.text = "Correct!";
-            //Debug.Log("Correct!");
+            result.color = Color.green;
             correctAnswersCount++;
         }
         else
         {
-            result.text = "InCorrect!";
-            //Debug.Log("Incorrect!");
+            result.text = "Incorrect!";
+            result.color = Color.red;
         }
 
         currentQuestionIndex++;
         StartCoroutine(DisplayNextQuestionAfterDelay());
     }
+
     private IEnumerator DisplayNextQuestionAfterDelay()
     {
-        // Wait for a brief delay before displaying the next question
         yield return new WaitForSeconds(1.5f);
 
-        // Clear the result text
         result.text = "";
 
-        // Display the next question
         DisplayNextQuestion();
+
+        EnableOptionButtons();
     }
 
     private void DisableOptionButtons()
@@ -112,5 +141,54 @@ public class mulLogic : MonoBehaviour
             button.gameObject.SetActive(false);
         }
     }
-   
+
+    private void EnableOptionButtons()
+    {
+        foreach (Button button in optionButtons)
+        {
+            button.interactable = true;
+        }
+    }
+
+    public void PauseGame()
+    {
+        gamePaused = true;
+        pauseMenuPanel.SetActive(true); // Show the pause menu panel
+        Time.timeScale = 0f; // Pause the game
+    }
+
+    public void ResumeGame()
+    {
+        gamePaused = false;
+        pauseMenuPanel.SetActive(false); // Hide the pause menu panel
+        Time.timeScale = 1f; // Resume the game
+    }
+
+    public void RestartGame()
+    {
+        currentQuestionIndex = 0;
+        correctAnswersCount = 0;
+        gamePaused = false;
+        pauseMenuPanel.SetActive(false); // Hide the pause menu panel
+        Time.timeScale = 1f; // Resume the game
+        DisplayNextQuestion();
+    }
+
+    private void DisplayFinalResult()
+    {
+        if (correctAnswersCount > 0)
+        {
+            result.text = "Correct: " + correctAnswersCount + "/" + totalQuestions;
+            result.color = Color.green;
+        }
+        else
+        {
+            result.text = "Correct: " + correctAnswersCount + "/" + totalQuestions;
+            result.color = Color.red;
+        }
+
+        // Hide the pause button if the game is ended
+        pauseMenuPanel.SetActive(false);
+        gameEnded = true;
+    }
 }
