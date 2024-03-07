@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -41,10 +40,10 @@ public class LoadingScreen : MonoBehaviour
         // Move the number and background up
         StartCoroutine(MoveNumberAndBackgroundUp());
     }
-
+    
     IEnumerator MoveNumberAndBackgroundUp()
     {
-        float targetPositionY = backgroundImage.rectTransform.anchoredPosition.y; // Adjust as needed
+        float targetPositionY = backgroundImage.rectTransform.anchoredPosition.y; // Keep the original y position
         float elapsedTime = 0f;
         float duration = 1f; // Duration of the movement animation
 
@@ -52,14 +51,12 @@ public class LoadingScreen : MonoBehaviour
         {
             float newY = Mathf.Lerp(backgroundImage.rectTransform.anchoredPosition.y, targetPositionY, elapsedTime / duration);
             backgroundImage.rectTransform.anchoredPosition = new Vector2(backgroundImage.rectTransform.anchoredPosition.x, newY);
-            numberText.rectTransform.anchoredPosition = new Vector2(numberText.rectTransform.anchoredPosition.x, newY); // Move number along with background
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // Ensure background and number are at the target position
+        // Ensure background is at the target position
         backgroundImage.rectTransform.anchoredPosition = new Vector2(backgroundImage.rectTransform.anchoredPosition.x, targetPositionY);
-        numberText.rectTransform.anchoredPosition = new Vector2(numberText.rectTransform.anchoredPosition.x, targetPositionY);
     }
 
     void LoadNextScene()
