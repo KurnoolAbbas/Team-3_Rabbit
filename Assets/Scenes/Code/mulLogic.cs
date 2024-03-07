@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class mulLogic : MonoBehaviour
 {
@@ -172,6 +173,11 @@ public class mulLogic : MonoBehaviour
         pauseMenuPanel.SetActive(false); // Hide the pause menu panel
         Time.timeScale = 1f; // Resume the game
         DisplayNextQuestion();
+    }
+
+    public void quit()
+    {
+        SceneManager.LoadScene("main");
     }
 
     private void DisplayFinalResult()
