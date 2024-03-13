@@ -197,4 +197,23 @@ public class mulLogic : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         gameEnded = true;
     }
+    public class SpawnRabbits : MonoBehaviour
+    {
+        public GameObject rabbitPrefab;
+        public int answer;
+
+        void Start()
+        {
+            SpawnRabbitStack(answer);
+        }
+
+        void SpawnRabbitStack(int numberOfRabbits)
+        {
+            for (int i = 0; i < numberOfRabbits; i++)
+            {
+                // Spawn a rabbit at the desired position
+                Instantiate(rabbitPrefab, new Vector3(0, i * 1.0f, 0), Quaternion.identity);
+            }
+        }
+    }
 }
