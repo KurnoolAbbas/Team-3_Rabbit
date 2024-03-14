@@ -1,70 +1,109 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using TMPro;
 
 public class LoadingScreen : MonoBehaviour
 {
-    public Text numberText;
-    public Image backgroundImage;
+    public TextMeshProUGUI countdownText;
+    public Slider progressBar;
 
-    private Color[] backgroundColors = { Color.blue, Color.green, Color.yellow };
-    private int currentNumberIndex = 0;
+    public float countdownDuration = 3f;
+    private float countdownTimer;
+    private bool loadingComplete = false;
 
-    void Start()
+    private void Start()
     {
-        StartCoroutine(DisplayNumbersWithAnimation());
-    }
+        countdownTimer = countdownDuration;
 
-    IEnumerator DisplayNumbersWithAnimation()
-    {
-        while (currentNumberIndex < 3)
+        // Check if UI Text and Slider components are assigned
+        if (countdownText == null)
         {
-            AnimateNumber(currentNumberIndex + 1);
-            yield return new WaitForSeconds(1.0f); // Wait for 2 seconds before showing the next number
-            currentNumberIndex++;
+            Debug.LogError("UI Text component not assigned to LoadingScreen script. Please assign it in the Inspector.");
         }
 
-        // After displaying numbers 1, 2, and 3, load next scene after a delay
-        yield return new WaitForSeconds(1.0f);
-        LoadNextScene();
-    }
-
-    void AnimateNumber(int number)
-    {
-        // Set text and background color
-        numberText.text = number.ToString();
-        numberText.color = Color.white;
-        backgroundImage.color = backgroundColors[currentNumberIndex];
-
-        // Move the number and background up
-        StartCoroutine(MoveNumberAndBackgroundUp());
-    }
-    
-    IEnumerator MoveNumberAndBackgroundUp()
-    {
-        float targetPositionY = backgroundImage.rectTransform.anchoredPosition.y; // Keep the original y position
-        float elapsedTime = 0f;
-        float duration = 1f; // Duration of the movement animation
-
-        while (elapsedTime < duration)
+        if (progressBar == null)
         {
-            float newY = Mathf.Lerp(backgroundImage.rectTransform.anchoredPosition.y, targetPositionY, elapsedTime / duration);
-            backgroundImage.rectTransform.anchoredPosition = new Vector2(backgroundImage.rectTransform.anchoredPosition.x, newY);
-            elapsedTime += Time.deltaTime;
+            Debug.LogError("Slider component not assigned to LoadingScreen script. Please assign it in the Inspector.");
+        }
+
+        // Start the loading process
+        StartCoroutine(LoadingSequence());
+    }
+
+    private IEnumerator LoadingSequence()
+    {
+        float progress = 0f;
+
+        while (progress < 1f)
+        {
+            // Update the countdown timer
+            countdownTimer -= Time.deltaTime;
+
+            // Display the countdown on the loading screen
+            int roundedCountdown = Mathf.CeilToInt(countdownTimer);
+            if (countdownText != null)
+            {
+                countdownText.text = "" + roundedCountdown;
+
+                // Change the color of countdown text every second
+                countdownText.color = GetCountdownColor(roundedCountdown);
+            }
+
+            // Update the progress bar
+            progress = 1f - (countdownTimer / countdownDuration);
+            if (progressBar != null)
+            {
+                progressBar.value = progress;
+            }
+
             yield return null;
         }
 
-        // Ensure background is at the target position
-        backgroundImage.rectTransform.anchoredPosition = new Vector2(backgroundImage.rectTransform.anchoredPosition.x, targetPositionY);
+        // Ensure the progress bar is at 100% when the countdown completes
+        if (progressBar != null)
+        {
+            progressBar.value = 4f;
+        }
+
+        // Mark loading as complete
+        loadingComplete = true;
     }
 
-    void LoadNextScene()
+    private Color GetCountdownColor(int seconds)
     {
-        // Replace "YourNextSceneName" with the name of your next scene
-        SceneManager.LoadScene("main scene");
-
+        // Define your color logic here
+        if (seconds == 1)
+        {
+            return Color.green;
+        }
+        else if(seconds == 2)
+        {
+            return Color.yellow;
+        }
+        else if(seconds == 3)
+        {
+            return Color.blue;
+        }
+        else
+        {
+            return Color.red;
+        }
     }
 
+    private void Update()
+    {
+        // Check if the loading is complete, then load the main scene
+        if (loadingComplete)
+        {
+            LoadMainScene();
+        }
+    }
 
+    private void LoadMainScene()
+    {
+        // Load the main scene (replace "MainScene" with the name of your main scene)
+        SceneManager.LoadScene("main");
+    }
 }
