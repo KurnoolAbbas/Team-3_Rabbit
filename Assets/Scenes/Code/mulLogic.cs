@@ -10,7 +10,12 @@ public class mulLogic : MonoBehaviour
     public Text questionText;
     public Button[] optionButtons;
     public Text questionCounterText;
-    public GameObject pauseMenuPanel; // Reference to your pause menu panel
+    public GameObject pauseMenuPanel;
+    public GameObject endGamePanel;
+    public Text accuracyText;
+    public Text rateText;
+    public Text wrongText;
+
 
     private int currentQuestionIndex = 0;
     private int correctAnswersCount = 0;
@@ -20,18 +25,24 @@ public class mulLogic : MonoBehaviour
     private bool gamePaused = false;
     private bool gameEnded = false;
 
+    private float startTime;
+    private float endTime;
+
     private void Start()
     {
         DisplayNextQuestion();
+        startTime = Time.time;
     }
 
     private void DisplayNextQuestion()
     {
+        ResetButtonColors();
+
         if (currentQuestionIndex >= totalQuestions)
         {
-            // Game over
+            // To display the results when the game ends
             pauseMenuPanel.SetActive(false);
-            lastText.text = "Game Over :)";
+            lastText.text = "Congratulations";
             DisplayFinalResult();
             DisableOptionButtons();
             return;
@@ -106,21 +117,51 @@ public class mulLogic : MonoBehaviour
         int correctAnswerIndex = answerPositions[0];
         bool isCorrect = selectedAnswerIndex == correctAnswerIndex;
 
-        if (isCorrect)
+        for (int i = 0; i < optionButtons.Length; i++)
+        {
+            Button button = optionButtons[i];
+            Text buttonText = button.GetComponentInChildren<Text>();
+
+            if (i == correctAnswerIndex && !isCorrect)
+            {
+                buttonText.color = Color.white;
+            }
+            else if (i == selectedAnswerIndex)
+            {
+                buttonText.color = isCorrect ? Color.green : Color.red;
+            }
+            else
+            {
+                buttonText.color = Color.white;
+            }
+
+            button.interactable = false;
+        }
+
+        if (!isCorrect)
+        {
+            result.text = "Incorrect!";
+            result.color = Color.red;
+        }
+        else
         {
             result.text = "Correct!";
             result.color = Color.green;
             correctAnswersCount++;
         }
-        else
-        {
-            result.text = "Incorrect!";
-            result.color = Color.red;
-        }
 
         currentQuestionIndex++;
         StartCoroutine(DisplayNextQuestionAfterDelay());
     }
+    private void ResetButtonColors()
+    {
+        foreach (Button button in optionButtons)
+        {
+            Text buttonText = button.GetComponentInChildren<Text>();
+            buttonText.color = Color.white; // Reset color to black for all buttons
+        }
+    }
+
 
     private IEnumerator DisplayNextQuestionAfterDelay()
     {
@@ -182,38 +223,41 @@ public class mulLogic : MonoBehaviour
 
     private void DisplayFinalResult()
     {
-        if (correctAnswersCount > 0)
+
+        float accuracy = (float)correctAnswersCount / totalQuestions * 100;
+        endTime = Time.time;
+        float rate = totalQuestions / (endTime - startTime) * 60; // Calculate rate per minute
+        int wrongAnswers = totalQuestions - correctAnswersCount;
+
+
+        int roundedAccuracy = Mathf.CeilToInt(accuracy);
+        int roundedRate = Mathf.CeilToInt(rate);
+
+        // Display stats with rounded values
+        accuracyText.text = "Accuracy: " + roundedAccuracy + "%";
+        rateText.text = "Rate: " + roundedRate + "/min";
+        wrongText.text = "Wrong: " + wrongAnswers;
+
+        GameObject pauseButton = GameObject.Find("PauseButton");
+        if (pauseButton != null)
         {
-            result.text = "Correct: " + correctAnswersCount + "/" + totalQuestions;
-            result.color = Color.green;
-        }
-        else
-        {
-            result.text = "Correct: " + correctAnswersCount + "/" + totalQuestions;
-            result.color = Color.red;
+            pauseButton.SetActive(false);
         }
 
-        // Hide the pause button if the game is ended
         pauseMenuPanel.SetActive(false);
         gameEnded = true;
+
+        // Show end game panel
+        endGamePanel.SetActive(true);
     }
-    public class SpawnRabbits : MonoBehaviour
+    public void RestartFromQuestions()
     {
-        public GameObject rabbitPrefab;
-        public int answer;
-
-        void Start()
-        {
-            SpawnRabbitStack(answer);
-        }
-
-        void SpawnRabbitStack(int numberOfRabbits)
-        {
-            for (int i = 0; i < numberOfRabbits; i++)
-            {
-                // Spawn a rabbit at the desired position
-                Instantiate(rabbitPrefab, new Vector3(0, i * 1.0f, 0), Quaternion.identity);
-            }
-        }
+        SceneManager.LoadScene("multScreen");
     }
+    public void HomeScreen()
+    {
+        SceneManager.LoadScene("main");
+    }
+
+
 }
