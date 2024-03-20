@@ -17,7 +17,11 @@ public class mulLogic : MonoBehaviour
     public Text wrongText;
     public GameObject correctImage; // Reference to the GameObject containing the correct image
     public GameObject incorrectImage; // Reference to the GameObject containing the incorrect image
-
+    public GameObject driver1;
+    public GameObject window1;
+    public GameObject window2;
+    public GameObject window3;
+    public GameObject window4;
 
     private int currentQuestionIndex = 0;
     private int correctAnswersCount = 0;
@@ -47,6 +51,11 @@ public class mulLogic : MonoBehaviour
         {
             // To display the results when the game ends
             pauseMenuPanel.SetActive(false);
+            driver1.SetActive(false);
+            window1.SetActive(false);
+            window2.SetActive(false);
+            window3.SetActive(false);
+            window4.SetActive(false);
             lastText.text = "Congratulations";
             DisplayFinalResult();
             DisableOptionButtons();
@@ -231,18 +240,21 @@ public class mulLogic : MonoBehaviour
         foreach (Button button in optionButtons)
         {
             Text buttonText = button.GetComponentInChildren<Text>();
-            buttonText.color = Color.white; // Reset color to black for all buttons
+            buttonText.color = Color.black; // Reset color to black for all buttons
         }
     }
 
 
     private IEnumerator DisplayNextQuestionAfterDelay()
     {
+        
         yield return new WaitForSeconds(1.5f);
 
         result.text = "";
 
         DisplayNextQuestion();
+        incorrectImage.SetActive(false);
+        correctImage.SetActive(false);
 
         EnableOptionButtons();
     }
