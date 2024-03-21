@@ -65,13 +65,15 @@ public class mulLogic : MonoBehaviour
         int num1, num2;
         do
         {
-            num1 = Random.Range(1, 11);
-            num2 = Random.Range(1, 11);
+            num1 = Random.Range(1, 9);
+            num2 = Random.Range(1, 4);
         } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
 
         previousCorrectOption = num1 * num2;
 
         int correctAnswer = num1 * num2;
+
+        GenerateGrid(num1, num2);
 
         questionText.text = num1 + " * " + num2 + " = ?";
 
@@ -99,7 +101,39 @@ public class mulLogic : MonoBehaviour
 
         EnableOptionButtons(); // Ensure buttons are enabled for each question
     }
+    private void GenerateGrid(int num1, int num2)
+    {
+        // Destroy(refereneceTile);
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        GameObject referenceTile = (GameObject)Instantiate(Resources.Load("carrotImage"));
+        Canvas canvasRenderer = referenceTile.GetComponent<Canvas>();
 
+        // Set the sorting order
+        canvasRenderer.sortingOrder = 2;
+
+        float initialPosX = 1100;
+        float initialPosY = 2100;
+        float rowSpacing = -300;
+        float colSpacing = 300;
+
+        for (int row = 0; row < num2; row++)
+        {
+            float posY = initialPosY + (row * rowSpacing);
+
+            for (int col = 0; col < num1; col++)
+            {
+                float posX = initialPosX + (col * colSpacing);
+                GameObject tile = (GameObject)Instantiate(referenceTile, transform);
+                tile.transform.localPosition = new Vector2(posX, posY);
+            }
+        }
+
+        Destroy(referenceTile); // Destroy the reference tile object
+
+    }
     private void ShuffleAnswerPositions()
     {
         for (int i = 0; i < answerPositions.Length; i++)
@@ -122,64 +156,6 @@ public class mulLogic : MonoBehaviour
         }
         return false;
     }
-
-
-
-
-
-    //------------------------------------------------------//
-    /*
-     public void CheckAnswer(int selectedAnswerIndex)
-     {
-         if (gameEnded || gamePaused)
-             return; // If the game is paused or ended, do not process answer
-
-         int correctAnswerIndex = answerPositions[0];
-         bool isCorrect = selectedAnswerIndex == correctAnswerIndex;
-
-         for (int i = 0; i < optionButtons.Length; i++)
-         {
-             Button button = optionButtons[i];
-             Text buttonText = button.GetComponentInChildren<Text>();
-
-             if (i == correctAnswerIndex && !isCorrect)
-             {
-                 buttonText.color = Color.white;
-             }
-             else if (i == selectedAnswerIndex)
-             {
-                 buttonText.color = isCorrect ? Color.green : Color.red;
-             }
-             else
-             {
-                 buttonText.color = Color.white;
-             }
-
-             button.interactable = false;
-         }
-
-         if (!isCorrect)
-         {
-             result.text = "Incorrect!";
-             result.color = Color.red;
-         }
-         else
-         {
-             result.text = "Correct!";
-             result.color = Color.green;
-             correctAnswersCount++;
-             // Enable the correct image GameObject and play its animation
-             correctImage.SetActive(true);
-             // You can trigger the animation here using GetComponent<Animation>() or GetComponent<Animator>()
-
-         }
-
-         currentQuestionIndex++;
-         StartCoroutine(DisplayNextQuestionAfterDelay());
-     }
-
-     */
-   
 
     public void CheckAnswer(int selectedAnswerIndex)
     {
@@ -231,10 +207,6 @@ public class mulLogic : MonoBehaviour
         StartCoroutine(DisplayNextQuestionAfterDelay());
     }
 
-
-
-
-    //------------------------------------------------------------//
     private void ResetButtonColors()
     {
         foreach (Button button in optionButtons)
