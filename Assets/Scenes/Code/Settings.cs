@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-   public Dropdown Dropdown;
+    public GameObject panelToOpen;
+    public GameObject settingspanel;// Reference to the panel to be opened
+    public Dropdown Dropdown;
 
     // Method to handle the selection change event
     public void OnAgeSelected(int index)
@@ -16,4 +18,22 @@ public class Settings : MonoBehaviour
         // Implement logic to apply settings or behavior changes based on the selected age
         // For example, adjust game difficulty, content accessibility, etc.
     }
+
+
+    public void OpenPanel()
+    {
+        if (panelToOpen != null)
+        {
+            panelToOpen.SetActive(true);  // Show the panel
+        }
+    }
+    public void OpensettingsPanel()
+    {
+        if (settingspanel != null)
+        {
+            settingspanel.SetActive(true);  // Show the panel
+        }
+    }
+
+
 }
