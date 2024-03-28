@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571398, b: 0.30692294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2252,7 +2252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 301.16, y: 811.8}
+  m_AnchoredPosition: {x: 368, y: 817}
   m_SizeDelta: {x: 210.79, y: 167.0477}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &822105207
@@ -2849,7 +2849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1069820252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2857,7 +2857,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069820251}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c3a46d0ff9c13948b1368c3dcc1034b, type: 3}
   m_Name: 
@@ -2869,7 +2869,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069820251}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a08bb11a6a2ef2c41bf0c7e7c4dab0fd, type: 3}
@@ -2967,7 +2967,7 @@ Transform:
   m_GameObject: {fileID: 1069820251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1720.6598, y: 970.65906, z: -11.963188}
+  m_LocalPosition: {x: 1700.16, y: 967.77, z: -11.963188}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3892,7 +3892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1531230520
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3900,7 +3900,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531230519}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: debfb911c00e6404bae7e963f713034a, type: 3}
@@ -3998,7 +3998,7 @@ Transform:
   m_GameObject: {fileID: 1531230519}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1720.6598, y: 970.65906, z: -11.963188}
+  m_LocalPosition: {x: 1701.86, y: 966.49, z: -11.963188}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4186,7 +4186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -144.21935, y: 863.65}
+  m_AnchoredPosition: {x: -250, y: 868}
   m_SizeDelta: {x: 207.9237, y: 199.07}
   m_Pivot: {x: 1.157216, y: 0.72499317}
 --- !u!114 &1616591454
@@ -4317,7 +4317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 128.36, y: 28.351}
+  m_AnchoredPosition: {x: 104, y: 9}
   m_SizeDelta: {x: 237.29, y: 156.488}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1620587403
@@ -4341,7 +4341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5327,7 +5327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000015259, y: -249.83}
+  m_AnchoredPosition: {x: -33, y: -128}
   m_SizeDelta: {x: 170.1865, y: 184.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2060194442

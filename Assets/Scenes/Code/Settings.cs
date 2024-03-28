@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
     public GameObject panelToOpen;
     public GameObject settingspanel;// Reference to the panel to be opened
     public Dropdown Dropdown;
+    public GameObject settingsMenu;
 
     // Method to handle the selection change event
     public void OnAgeSelected(int index)
@@ -31,7 +33,9 @@ public class Settings : MonoBehaviour
     {
         if (settingspanel != null)
         {
-            settingspanel.SetActive(true);  // Show the panel
+            settingspanel.SetActive(true);
+            settingsMenu.SetActive(true);// Show the panel
+           // SceneManager.LoadScene();
         }
     }
     public void EXit()
