@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +19,9 @@ public class loadingScreenopen : MonoBehaviour
 
     IEnumerator LoadSceneAfterDelay()
     {
-        yield return new WaitForSeconds(delayTime); Debug.Log("mama");
-        SceneManager.LoadScene("loading");
+        yield return new WaitForSeconds(delayTime); 
+        //SceneManager.LoadScene("loading");
+        
+        EditorSceneManager.OpenScene(nextSceneName);
     }
 }
