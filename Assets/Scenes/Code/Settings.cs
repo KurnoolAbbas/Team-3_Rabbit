@@ -34,6 +34,11 @@ public class Settings : MonoBehaviour
             settingspanel.SetActive(true);  // Show the panel
         }
     }
+    public void EXit()
+    {
+        settingspanel.SetActive(false);
+        panelToOpen.SetActive(false);
+    }
 
 
 }

@@ -65,7 +65,7 @@ public class mulLogic : MonoBehaviour
         int num1, num2;
         do
         {
-            num1 = Random.Range(1, 9);
+            num1 = Random.Range(1, 4);
             num2 = Random.Range(1, 4);
         } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
 
@@ -108,16 +108,16 @@ public class mulLogic : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        GameObject referenceTile = (GameObject)Instantiate(Resources.Load("carrotImage"));
+        GameObject referenceTile = (GameObject)Instantiate(Resources.Load("prefab"));
         Canvas canvasRenderer = referenceTile.GetComponent<Canvas>();
 
         // Set the sorting order
         canvasRenderer.sortingOrder = 2;
 
-        float initialPosX = 1100;
-        float initialPosY = 2100;
-        float rowSpacing = -300;
-        float colSpacing = 300;
+        float initialPosX = -48;
+        float initialPosY = 150;
+        float rowSpacing = 50;
+        float colSpacing = 50;
 
         for (int row = 0; row < num2; row++)
         {
