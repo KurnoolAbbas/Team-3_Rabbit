@@ -114,10 +114,10 @@ public class mulLogic : MonoBehaviour
         // Set the sorting order
         canvasRenderer.sortingOrder = 2;
 
-        float initialPosX = -48;
-        float initialPosY = 150;
-        float rowSpacing = 50;
-        float colSpacing = 50;
+        float initialPosX = 1863;
+        float initialPosY = 1254;
+        float rowSpacing = 110;
+        float colSpacing = 110;
 
         for (int row = 0; row < num2; row++)
         {
