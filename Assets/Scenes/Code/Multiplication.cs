@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Multiplication : MonoBehaviour
 {
-    
+
     public Text resultText;
     public Canvas panel;
 
@@ -20,7 +20,17 @@ public class Multiplication : MonoBehaviour
         for (int i = 1; i <= 10; i++)
         {
             int multiplicationResult = number * i;
-            results.Add($"{number}x{i}={multiplicationResult}");
+            if (i == 9)
+            {
+
+                results.Add($"  {number}x{i}={multiplicationResult}");
+            }
+            else
+            {
+
+                results.Add($"{number}x{i}={multiplicationResult}");
+            }
+
         }
 
         // Find the maximum length of the results
@@ -66,10 +76,10 @@ public class Multiplication : MonoBehaviour
 
     private void ChangePanelColor()
     {
-        // Generate a random color
-        Color color = new Color(Random.value, Random.value, Random.value);
+        float r = Random.Range(0f, 0.5f);
+        float g = Random.Range(0f, 0.5f);
+        float b = Random.Range(0f, 0.5f);
+        panel.GetComponent<Image>().color = new Color(r, g, b);
 
-        // Assign the color to the panel
-        panel.GetComponent<Image>().color = color;
     }
 }
