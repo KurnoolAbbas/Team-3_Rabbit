@@ -34,7 +34,7 @@ public class mulLogic : MonoBehaviour
     private float startTime;
     private float endTime;
 
-    
+
     private void Start()
     {
         incorrectImage.SetActive(false);
@@ -170,20 +170,15 @@ public class mulLogic : MonoBehaviour
             Button button = optionButtons[i];
             Text buttonText = button.GetComponentInChildren<Text>();
 
-            if (i == correctAnswerIndex && !isCorrect)
-            {
-                buttonText.color = Color.white;
-            }
-            else if (i == selectedAnswerIndex)
+            if (i == selectedAnswerIndex)
             {
                 buttonText.color = isCorrect ? Color.green : Color.red;
+                button.interactable = true;
             }
             else
             {
-                buttonText.color = Color.white;
+                button.gameObject.SetActive(false);
             }
-
-            button.interactable = false;
         }
 
         if (!isCorrect)
@@ -192,7 +187,7 @@ public class mulLogic : MonoBehaviour
             result.text = "";
             result.color = Color.red;
             incorrectImage.SetActive(true); // Enable the incorrect image GameObject
-            
+
         }
         else
         {
@@ -211,6 +206,7 @@ public class mulLogic : MonoBehaviour
     {
         foreach (Button button in optionButtons)
         {
+            button.gameObject.SetActive(true);
             Text buttonText = button.GetComponentInChildren<Text>();
             buttonText.color = Color.black; // Reset color to black for all buttons
         }
@@ -219,7 +215,7 @@ public class mulLogic : MonoBehaviour
 
     private IEnumerator DisplayNextQuestionAfterDelay()
     {
-        
+
         yield return new WaitForSeconds(1.5f);
 
         result.text = "";
@@ -315,4 +311,3 @@ public class mulLogic : MonoBehaviour
         SceneManager.LoadScene("main");
     }
 }
-
