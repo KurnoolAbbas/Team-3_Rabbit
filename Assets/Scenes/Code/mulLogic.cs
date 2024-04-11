@@ -23,6 +23,9 @@ public class mulLogic : MonoBehaviour
     public GameObject window2;
     public GameObject window3;
     public GameObject window4;
+    public AudioSource correctSound; // Assigned correct sound source
+    public AudioSource incorrectSound; // Assigned incorrect sound source
+
 
     private int currentQuestionIndex = 0;
     private int correctAnswersCount = 0;
@@ -189,6 +192,7 @@ public class mulLogic : MonoBehaviour
             result.text = "";
             result.color = Color.red;
             incorrectImage.SetActive(true); // Enable the incorrect image GameObject
+            incorrectSound.Play();
 
         }
         else
@@ -198,6 +202,7 @@ public class mulLogic : MonoBehaviour
             result.color = Color.green;
             correctAnswersCount++;
             correctImage.SetActive(true); // Enable the correct image GameObject
+            correctSound.Play();
         }
 
         currentQuestionIndex++;
