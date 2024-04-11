@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using MathNet.Numerics.Random;
 
 public class mulLogic : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class mulLogic : MonoBehaviour
     public GameObject window2;
     public GameObject window3;
     public GameObject window4;
+    public AudioSource correctSound; // Assigned correct sound source
+    public AudioSource incorrectSound; // Assigned incorrect sound source
+
 
     private int currentQuestionIndex = 0;
     private int correctAnswersCount = 0;
@@ -34,7 +38,7 @@ public class mulLogic : MonoBehaviour
     private float startTime;
     private float endTime;
 
-    
+
     private void Start()
     {
         incorrectImage.SetActive(false);
@@ -46,6 +50,7 @@ public class mulLogic : MonoBehaviour
     private void DisplayNextQuestion()
     {
         ResetButtonColors();
+        var rng = new SystemRandomSource();
 
         if (currentQuestionIndex >= totalQuestions)
         {
@@ -65,8 +70,8 @@ public class mulLogic : MonoBehaviour
         int num1, num2;
         do
         {
-            num1 = Random.Range(1, 9);
-            num2 = Random.Range(1, 4);
+            num1 = rng.Next(1, 4);
+            num2 =rng.Next(1, 4);
         } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
 
         previousCorrectOption = num1 * num2;
@@ -77,7 +82,7 @@ public class mulLogic : MonoBehaviour
 
         questionText.text = num1 + " * " + num2 + " = ?";
 
-        ShuffleAnswerPositions();
+        ShuffleAnswerPositions(rng);
 
         for (int i = 0; i < optionButtons.Length; i++)
         {
@@ -90,7 +95,7 @@ public class mulLogic : MonoBehaviour
                 int randomAnswer;
                 do
                 {
-                    randomAnswer = Random.Range(1, 101); // Generate random wrong answers
+                    randomAnswer =rng.Next(1, 101); // Generate random wrong answers
                 } while (randomAnswer == correctAnswer || AnswerExists(randomAnswer));
 
                 optionButtons[i].GetComponentInChildren<Text>().text = randomAnswer.ToString();
@@ -108,16 +113,16 @@ public class mulLogic : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        GameObject referenceTile = (GameObject)Instantiate(Resources.Load("carrotImage"));
+        GameObject referenceTile = (GameObject)Instantiate(Resources.Load("prefab"));
         Canvas canvasRenderer = referenceTile.GetComponent<Canvas>();
 
         // Set the sorting order
         canvasRenderer.sortingOrder = 2;
 
-        float initialPosX = 1100;
-        float initialPosY = 2100;
-        float rowSpacing = -300;
-        float colSpacing = 300;
+        float initialPosX = 1828;
+        float initialPosY = 1408;
+        float rowSpacing = 200;
+        float colSpacing = 200;
 
         for (int row = 0; row < num2; row++)
         {
@@ -134,12 +139,12 @@ public class mulLogic : MonoBehaviour
         Destroy(referenceTile); // Destroy the reference tile object
 
     }
-    private void ShuffleAnswerPositions()
+    private void ShuffleAnswerPositions(SystemRandomSource rng)
     {
         for (int i = 0; i < answerPositions.Length; i++)
         {
             int temp = answerPositions[i];
-            int randomIndex = Random.Range(i, answerPositions.Length);
+            int randomIndex = rng.Next(i, answerPositions.Length);
             answerPositions[i] = answerPositions[randomIndex];
             answerPositions[randomIndex] = temp;
         }
@@ -157,6 +162,7 @@ public class mulLogic : MonoBehaviour
         return false;
     }
 
+    
     public void CheckAnswer(int selectedAnswerIndex)
     {
         if (gameEnded || gamePaused)
@@ -165,52 +171,58 @@ public class mulLogic : MonoBehaviour
         int correctAnswerIndex = answerPositions[0];
         bool isCorrect = selectedAnswerIndex == correctAnswerIndex;
 
+        // Loop through each option button
         for (int i = 0; i < optionButtons.Length; i++)
         {
             Button button = optionButtons[i];
             Text buttonText = button.GetComponentInChildren<Text>();
 
-            if (i == correctAnswerIndex && !isCorrect)
+            // If the current button is the correct answer
+            if (i == correctAnswerIndex)
             {
-                buttonText.color = Color.white;
-            }
-            else if (i == selectedAnswerIndex)
-            {
+                // Set the color to green if the selected answer is correct, and to red if it's incorrect
                 buttonText.color = isCorrect ? Color.green : Color.red;
+                button.interactable = true;
             }
             else
             {
-                buttonText.color = Color.white;
+                // Hide other buttons
+                button.gameObject.SetActive(false);
             }
-
-            button.interactable = false;
         }
 
+        // Handle correct and incorrect answer feedback
         if (!isCorrect)
         {
+            // If the answer is incorrect
             correctImage.SetActive(false);
             result.text = "";
             result.color = Color.red;
             incorrectImage.SetActive(true); // Enable the incorrect image GameObject
-            
+            incorrectSound.Play(); // Play incorrect sound effect
         }
         else
         {
+            // If the answer is correct
             incorrectImage.SetActive(false);
             result.text = "";
             result.color = Color.green;
             correctAnswersCount++;
             correctImage.SetActive(true); // Enable the correct image GameObject
+            correctSound.Play(); // Play correct sound effect
         }
 
         currentQuestionIndex++;
         StartCoroutine(DisplayNextQuestionAfterDelay());
     }
 
+
+
     private void ResetButtonColors()
     {
         foreach (Button button in optionButtons)
         {
+            button.gameObject.SetActive(true);
             Text buttonText = button.GetComponentInChildren<Text>();
             buttonText.color = Color.black; // Reset color to black for all buttons
         }
@@ -219,7 +231,7 @@ public class mulLogic : MonoBehaviour
 
     private IEnumerator DisplayNextQuestionAfterDelay()
     {
-        
+
         yield return new WaitForSeconds(1.5f);
 
         result.text = "";
@@ -315,4 +327,3 @@ public class mulLogic : MonoBehaviour
         SceneManager.LoadScene("main");
     }
 }
-

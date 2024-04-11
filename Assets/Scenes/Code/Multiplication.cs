@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class Multiplication : MonoBehaviour
 {
-    
     public Text resultText;
     public Canvas panel;
 
@@ -36,7 +34,21 @@ public class Multiplication : MonoBehaviour
         // Add padding before each result to ensure consistent spacing
         for (int i = 0; i < results.Count; i++)
         {
+            // Calculate padding length dynamically based on the maximum length
             int paddingLength = maxLength - results[i].Length + 3; // Adjust the padding length as needed
+
+            // Decrease padding length for the last multiplication result
+            if (i == results.Count - 1)
+            {
+                paddingLength -= 2; // Adjust this value as needed
+            }
+
+            // Add extra space before "x10" if needed
+            if (i == results.Count - 2)
+            {
+                paddingLength++; // Add an extra space
+            }
+
             string padding = new string(' ', paddingLength);
             table += $"{padding}{results[i]}";
 
@@ -66,10 +78,9 @@ public class Multiplication : MonoBehaviour
 
     private void ChangePanelColor()
     {
-        // Generate a random color
-        Color color = new Color(Random.value, Random.value, Random.value);
-
-        // Assign the color to the panel
-        panel.GetComponent<Image>().color = color;
+        float r = Random.Range(0f, 0.5f);
+        float g = Random.Range(0f, 0.5f);
+        float b = Random.Range(0f, 0.5f);
+        panel.GetComponent<Image>().color = new Color(r, g, b);
     }
 }
