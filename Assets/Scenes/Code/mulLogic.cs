@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using MathNet.Numerics.Random;
 
 public class mulLogic : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class mulLogic : MonoBehaviour
     private void DisplayNextQuestion()
     {
         ResetButtonColors();
+        var rng = new SystemRandomSource();
 
         if (currentQuestionIndex >= totalQuestions)
         {
@@ -65,8 +67,8 @@ public class mulLogic : MonoBehaviour
         int num1, num2;
         do
         {
-            num1 = Random.Range(1, 4);
-            num2 = Random.Range(1, 4);
+            num1 = rng.Next(1, 4);
+            num2 =rng.Next(1, 4);
         } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
 
         previousCorrectOption = num1 * num2;
@@ -77,7 +79,7 @@ public class mulLogic : MonoBehaviour
 
         questionText.text = num1 + " * " + num2 + " = ?";
 
-        ShuffleAnswerPositions();
+        ShuffleAnswerPositions(rng);
 
         for (int i = 0; i < optionButtons.Length; i++)
         {
@@ -90,7 +92,7 @@ public class mulLogic : MonoBehaviour
                 int randomAnswer;
                 do
                 {
-                    randomAnswer = Random.Range(1, 101); // Generate random wrong answers
+                    randomAnswer =rng.Next(1, 101); // Generate random wrong answers
                 } while (randomAnswer == correctAnswer || AnswerExists(randomAnswer));
 
                 optionButtons[i].GetComponentInChildren<Text>().text = randomAnswer.ToString();
@@ -134,12 +136,12 @@ public class mulLogic : MonoBehaviour
         Destroy(referenceTile); // Destroy the reference tile object
 
     }
-    private void ShuffleAnswerPositions()
+    private void ShuffleAnswerPositions(SystemRandomSource rng)
     {
         for (int i = 0; i < answerPositions.Length; i++)
         {
             int temp = answerPositions[i];
-            int randomIndex = Random.Range(i, answerPositions.Length);
+            int randomIndex = rng.Next(i, answerPositions.Length);
             answerPositions[i] = answerPositions[randomIndex];
             answerPositions[randomIndex] = temp;
         }
