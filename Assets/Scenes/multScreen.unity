@@ -234,11 +234,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1520446117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15.749701, y: 500.41873}
-  m_SizeDelta: {x: 417.1584, y: 151.2915}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 28.050995, y: -394.82904}
+  m_SizeDelta: {x: 417.1584, y: 191.39111}
+  m_Pivot: {x: 0.5, y: 0.678926}
 --- !u!114 &76043577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,8 +661,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -287.04504, y: 306.05023}
-  m_SizeDelta: {x: 177.91, y: 236.202}
+  m_AnchoredPosition: {x: -287.04504, y: 312.86}
+  m_SizeDelta: {x: 177.91, y: 219.17}
   m_Pivot: {x: 0.5, y: 0.6}
 --- !u!114 &153990270
 MonoBehaviour:
@@ -5691,9 +5691,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2060194445}
-        m_TargetAssemblyTypeName: SceeneLoader, Assembly-CSharp
-        m_MethodName: LoadSceneOnClick
+      - m_Target: {fileID: 2054881088}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5703,9 +5703,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2054881088}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 2060194445}
+        m_TargetAssemblyTypeName: SceeneLoader, Assembly-CSharp
+        m_MethodName: LoadSceneOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

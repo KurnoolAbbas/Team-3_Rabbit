@@ -162,6 +162,7 @@ public class mulLogic : MonoBehaviour
         return false;
     }
 
+    
     public void CheckAnswer(int selectedAnswerIndex)
     {
         if (gameEnded || gamePaused)
@@ -170,44 +171,52 @@ public class mulLogic : MonoBehaviour
         int correctAnswerIndex = answerPositions[0];
         bool isCorrect = selectedAnswerIndex == correctAnswerIndex;
 
+        // Loop through each option button
         for (int i = 0; i < optionButtons.Length; i++)
         {
             Button button = optionButtons[i];
             Text buttonText = button.GetComponentInChildren<Text>();
 
-            if (i == selectedAnswerIndex)
+            // If the current button is the correct answer
+            if (i == correctAnswerIndex)
             {
+                // Set the color to green if the selected answer is correct, and to red if it's incorrect
                 buttonText.color = isCorrect ? Color.green : Color.red;
                 button.interactable = true;
             }
             else
             {
+                // Hide other buttons
                 button.gameObject.SetActive(false);
             }
         }
 
+        // Handle correct and incorrect answer feedback
         if (!isCorrect)
         {
+            // If the answer is incorrect
             correctImage.SetActive(false);
             result.text = "";
             result.color = Color.red;
             incorrectImage.SetActive(true); // Enable the incorrect image GameObject
-            incorrectSound.Play();
-
+            incorrectSound.Play(); // Play incorrect sound effect
         }
         else
         {
+            // If the answer is correct
             incorrectImage.SetActive(false);
             result.text = "";
             result.color = Color.green;
             correctAnswersCount++;
             correctImage.SetActive(true); // Enable the correct image GameObject
-            correctSound.Play();
+            correctSound.Play(); // Play correct sound effect
         }
 
         currentQuestionIndex++;
         StartCoroutine(DisplayNextQuestionAfterDelay());
     }
+
+
 
     private void ResetButtonColors()
     {
