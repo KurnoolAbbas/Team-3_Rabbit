@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -549,6 +553,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134674120}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &141553228
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +629,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141553228}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
 --- !u!1 &153990268
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +668,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: -287.04504, y: 312.86}
+=======
+  m_AnchoredPosition: {x: -1156, y: 421}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_SizeDelta: {x: 177.91, y: 219.17}
   m_Pivot: {x: 0.5, y: 0.6}
 --- !u!114 &153990270
@@ -784,6 +795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceHeight: 0.01
   animationDuration: 1
+<<<<<<< HEAD
 --- !u!1 &211044756
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +893,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211044756}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
 --- !u!1 &255821017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,6 +1402,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337490166}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &369560841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,6 +1478,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369560841}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
 --- !u!1 &387435276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,6 +2005,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651728097}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &652155781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,6 +2081,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652155781}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
 --- !u!1 &675899317
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,7 +2733,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 165, y: -1630.6306}
+=======
+  m_AnchoredPosition: {x: 1095, y: -1522.5}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_SizeDelta: {x: 183.18, y: 219.2157}
   m_Pivot: {x: 0.000000007450581, y: -8.2658}
 --- !u!114 &823204385
@@ -2994,6 +3018,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869567432}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &1026951221
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,6 +3094,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026951221}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
 --- !u!1 &1065971237
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,23 +3556,34 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< HEAD
   - {fileID: 1026951222}
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   - {fileID: 2015449357}
   - {fileID: 304676556}
   - {fileID: 1072704803}
   - {fileID: 1773405245}
   - {fileID: 1667970287}
+<<<<<<< HEAD
   - {fileID: 141553229}
   - {fileID: 369560842}
   - {fileID: 652155782}
   - {fileID: 211044757}
   - {fileID: 1241541268}
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_Father: {fileID: 2080151655}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: -99.764, y: -691}
   m_SizeDelta: {x: 980.6865, y: 897.8607}
+=======
+  m_AnchoredPosition: {x: -7.933899, y: -654.2269}
+  m_SizeDelta: {x: 934.5543, y: 655.6669}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1234588825
 MonoBehaviour:
@@ -3567,7 +3605,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_Sprite: {fileID: 21300000, guid: 32585b7f7e9d84db29f098181a204e2a, type: 3}
+=======
+  m_Sprite: {fileID: 1390047846, guid: 8dadd2b66f30ef54089fcad40ddf90a1, type: 3}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3595,7 +3637,11 @@ Animator:
   m_GameObject: {fileID: 1234588823}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
+<<<<<<< HEAD
   m_Controller: {fileID: 0}
+=======
+  m_Controller: {fileID: 9100000, guid: ddecc3c0b8d8bc94ead89958f436181d, type: 2}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3606,6 +3652,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+<<<<<<< HEAD
 --- !u!1 &1241541267
 GameObject:
   m_ObjectHideFlags: 0
@@ -3703,6 +3750,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241541267}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
 --- !u!1 &1315047378
 GameObject:
   m_ObjectHideFlags: 0
@@ -4084,8 +4133,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 2.8659668, y: 47.784668}
   m_SizeDelta: {x: -8.141083, y: -198.35971}
+=======
+  m_AnchoredPosition: {x: 44, y: 0}
+  m_SizeDelta: {x: 2041.8547, y: -198.3597}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1520446119
 CanvasRenderer:
@@ -4191,6 +4245,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+<<<<<<< HEAD
 --- !u!1 &1569298861
 GameObject:
   m_ObjectHideFlags: 0
@@ -4325,6 +4380,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569298861}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
 --- !u!1 &1616591452
 GameObject:
   m_ObjectHideFlags: 0
@@ -4608,11 +4665,19 @@ MonoBehaviour:
   wrongText: {fileID: 525552939}
   correctImage: {fileID: 125328908}
   incorrectImage: {fileID: 675899317}
+<<<<<<< HEAD
   driver1: {fileID: 652155781}
   window1: {fileID: 1026951221}
   window2: {fileID: 1667970286}
   window3: {fileID: 141553228}
   window4: {fileID: 369560841}
+=======
+  driver1: {fileID: 0}
+  window1: {fileID: 0}
+  window2: {fileID: 1667970286}
+  window3: {fileID: 0}
+  window4: {fileID: 0}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   correctSound: {fileID: 755998302}
   incorrectSound: {fileID: 639175613}
 --- !u!1 &1667970286
@@ -4721,7 +4786,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 13215239}
+<<<<<<< HEAD
   - {fileID: 1569298862}
+=======
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_Father: {fileID: 1234588824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6038,8 +6106,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 28.051025, y: 131.97102}
   m_SizeDelta: {x: -162.4, y: -211.622}
+=======
+  m_AnchoredPosition: {x: -81, y: 0}
+  m_SizeDelta: {x: -500.5232, y: 72.6975}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2145481997
 MonoBehaviour:
@@ -6061,7 +6134,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_Sprite: {fileID: 21300000, guid: ff8c195f49afa1d4792dfffd73966b16, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: 46dbc53917886e94d83b8ca90d2959e3, type: 3}
+>>>>>>> b313129 (added sound off button and completed panel and carrot image change)
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
