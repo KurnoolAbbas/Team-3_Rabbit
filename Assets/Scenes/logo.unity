@@ -572,8 +572,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  nextSceneName: 
-  delayTime: 3
 --- !u!222 &1471411661
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -708,7 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: loading
-  delayTime: 3
+  delayTime: 1.999
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

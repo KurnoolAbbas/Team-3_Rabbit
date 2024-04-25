@@ -18,11 +18,6 @@ public class mulLogic : MonoBehaviour
     public Text wrongText;
     public GameObject correctImage; // Reference to the GameObject containing the correct image
     public GameObject incorrectImage; // Reference to the GameObject containing the incorrect image
-    public GameObject driver1;
-    public GameObject window1;
-    public GameObject window2;
-    public GameObject window3;
-    public GameObject window4;
     public AudioSource correctSound; // Assigned correct sound source
     public AudioSource incorrectSound; // Assigned incorrect sound source
 
@@ -43,10 +38,17 @@ public class mulLogic : MonoBehaviour
     {
         incorrectImage.SetActive(false);
         correctImage.SetActive(false);
+        //ClearSavedValues();
+        if (PlayerPrefs.HasKey("IsGameSaved"))
+        {
+            LoadGameState(); // If saved state exists, load it
+            DisplayNextQuestion();
+            startTime = Time.time;
+        }
         DisplayNextQuestion();
         startTime = Time.time;
     }
-
+    
     private void DisplayNextQuestion()
     {
         ResetButtonColors();
@@ -56,12 +58,7 @@ public class mulLogic : MonoBehaviour
         {
             // To display the results when the game ends
             pauseMenuPanel.SetActive(false);
-            driver1.SetActive(false);
-            window1.SetActive(false);
-            window2.SetActive(false);
-            window3.SetActive(false);
-            window4.SetActive(false);
-            lastText.text = "Congratulations";
+            lastText.text = "";
             DisplayFinalResult();
             DisableOptionButtons();
             return;
@@ -71,13 +68,15 @@ public class mulLogic : MonoBehaviour
         do
         {
             num1 = rng.Next(1, 4);
-            num2 =rng.Next(1, 4);
+            num2 = rng.Next(1, 4);
         } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
 
         previousCorrectOption = num1 * num2;
 
         int correctAnswer = num1 * num2;
+        Debug.Log("num1 " + num1);
 
+        Debug.Log("num2 " + num2);
         GenerateGrid(num1, num2);
 
         questionText.text = num1 + " * " + num2 + " = ?";
@@ -95,7 +94,7 @@ public class mulLogic : MonoBehaviour
                 int randomAnswer;
                 do
                 {
-                    randomAnswer =rng.Next(1, 101); // Generate random wrong answers
+                    randomAnswer = rng.Next(1, 101); // Generate random wrong answers
                 } while (randomAnswer == correctAnswer || AnswerExists(randomAnswer));
 
                 optionButtons[i].GetComponentInChildren<Text>().text = randomAnswer.ToString();
@@ -105,6 +104,13 @@ public class mulLogic : MonoBehaviour
         questionCounterText.text = (currentQuestionIndex + 1) + "/" + totalQuestions;
 
         EnableOptionButtons(); // Ensure buttons are enabled for each question
+    }
+    private void ClearSavedValues()
+    {
+        PlayerPrefs.DeleteKey("IsGameSaved");
+        PlayerPrefs.DeleteKey("CurrentQuestionIndex");
+        PlayerPrefs.DeleteKey("CorrectAnswersCount");
+        // Add any other saved values to be cleared
     }
     private void GenerateGrid(int num1, int num2)
     {
@@ -287,6 +293,8 @@ public class mulLogic : MonoBehaviour
 
     public void quit()
     {
+        ClearSavedValues();
+        
         SceneManager.LoadScene("main");
     }
 
@@ -317,6 +325,10 @@ public class mulLogic : MonoBehaviour
         gameEnded = true;
 
         endGamePanel.SetActive(true);
+        //ClearSavedValues();
+        PlayerPrefs.DeleteKey("IsGameSaved");
+        PlayerPrefs.DeleteKey("CurrentQuestionIndex");
+        PlayerPrefs.DeleteKey("CorrectAnswersCount");
     }
     public void RestartFromQuestions()
     {
@@ -325,5 +337,18 @@ public class mulLogic : MonoBehaviour
     public void HomeScreen()
     {
         SceneManager.LoadScene("main");
+    }
+    public void SaveGameState()
+    {
+        PlayerPrefs.SetInt("IsGameSaved", 1); // Set a flag to indicate game state is saved
+        PlayerPrefs.SetInt("CurrentQuestionIndex", currentQuestionIndex);
+        PlayerPrefs.SetInt("CorrectAnswersCount", correctAnswersCount);
+    }
+
+    public void LoadGameState()
+    {
+        currentQuestionIndex = PlayerPrefs.GetInt("CurrentQuestionIndex", 0);
+        correctAnswersCount = PlayerPrefs.GetInt("CorrectAnswersCount", 0);
+       
     }
 }

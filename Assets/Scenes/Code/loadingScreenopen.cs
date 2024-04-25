@@ -8,7 +8,7 @@ public class loadingScreenopen : MonoBehaviour
 {
     // Start is called before the first frame update
     public string nextSceneName; // Set the name of the scene to load
-    public float delayTime = 3.0f; // Time to wait before loading (in seconds)
+    public float delayTime = 1.9999f; // Time to wait before loading (in seconds)
     
 
 
@@ -20,8 +20,8 @@ public class loadingScreenopen : MonoBehaviour
     IEnumerator LoadSceneAfterDelay()
     {
         yield return new WaitForSeconds(delayTime); 
-        //SceneManager.LoadScene("loading");
+        SceneManager.LoadScene("loading");
         
-        EditorSceneManager.OpenScene(nextSceneName);
+        //EditorSceneManager.OpenScene(nextSceneName);
     }
 }

@@ -7,10 +7,13 @@ public class Multiplication : MonoBehaviour
 {
     public Text resultText;
     public Canvas panel;
+   
+    
 
     // Method to display the multiplication table of a given number
     public void DisplayMultiplicationTable(int number)
     {
+       
         string table = "";
         List<string> results = new List<string>();
 
@@ -83,4 +86,5 @@ public class Multiplication : MonoBehaviour
         float b = Random.Range(0f, 0.5f);
         panel.GetComponent<Image>().color = new Color(r, g, b);
     }
+    
 }

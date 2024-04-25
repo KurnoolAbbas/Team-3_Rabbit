@@ -4,6 +4,7 @@ using UnityEngine;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using System;
+using UnityEngine.UI;
 
 public class BannerScript : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class BannerScript : MonoBehaviour
 #endif
 
     BannerView _bannerView;
+    public GameObject promptPanel; // Reference to the UI panel for the prompt box
+
+    public Text promptText; // Reference to the Text component in the prompt box
+   // public GameObject settingsPanel;
 
     public void Start()
     {
@@ -40,7 +45,7 @@ public class BannerScript : MonoBehaviour
         }
 
         AdSize adSize = AdSize.Banner;
-        _bannerView = new BannerView(_adUnitId, adSize, 50, 700);
+        _bannerView = new BannerView(_adUnitId, adSize, 50, 720);
     }
 
     public void LoadAd()
@@ -74,15 +79,29 @@ public class BannerScript : MonoBehaviour
     {
         if (_bannerView != null)
         {
-            DestroyAd();
+            _bannerView.Hide();
         }
+        
     }
 
     private void ListenToAdEvents()
     {
         // Subscribe to banner ad events here.
     }
+    public void ShowPromptBox()
+    {
+        _bannerView.Hide();
+        promptPanel.SetActive(true); // Show the prompt panel
+        promptText.text = "  Upgrade for an\n   ad-free game!  \n\n   Pay now ";
 
+    }
+
+    // Method to hide the prompt box
+    public void HidePromptBox()
+    {
+        promptPanel.SetActive(false); // Hide the prompt panel
+        _bannerView.Show();
+    }
     public void DestroyAd()
     {
         if (_bannerView != null)
@@ -91,5 +110,10 @@ public class BannerScript : MonoBehaviour
             _bannerView.Destroy();
             _bannerView = null;
         }
+    }
+    public void ShowSettingsPanel()
+    {
+       // settingsPanel.SetActive(true);
+        
     }
 }
