@@ -72,6 +72,7 @@ public class mulLogic : MonoBehaviour
         } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
 
         previousCorrectOption = num1 * num2;
+        FindObjectOfType<QuestionAudio>().AudioPlayAsync(num1, num2);
 
         int correctAnswer = num1 * num2;
         Debug.Log("num1 " + num1);
