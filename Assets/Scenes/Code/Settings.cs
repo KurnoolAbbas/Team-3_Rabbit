@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 public class Settings : MonoBehaviour
 {
     public GameObject panelToOpen;
-    public GameObject settingspanel;// Reference to the panel to be opened
-    public Dropdown Dropdown;
+    public GameObject settingspanel;
     public GameObject settingsMenu;
+    public GameObject welcomePanel; // Reference to the welcome panel
+    public Text welcomeText; // Reference to the welcome panel's text component
+    public Dropdown Dropdown;
+    public GameObject submit;
+    public Text inputField;
 
     // Method to handle the selection change event
     public void OnAgeSelected(int index)
@@ -22,6 +26,33 @@ public class Settings : MonoBehaviour
     }
 
 
+    public void SubmitSettings()
+    {
+        string newText = inputField.text;
+
+        // Update the database with the new text (Replace this with your database update logic)
+        Debug.Log("Text to update in database: " + newText);
+
+        // Close the settings panel
+        settingspanel.SetActive(false);
+
+        welcomePanel.SetActive(true);
+
+        // Change text in welcome panel
+        if (welcomeText != null)
+        {
+            welcomeText.text = "Welcome, " + newText + "!";
+        }
+        // Disable the welcome panel after opening it
+        Invoke("DisableWelcomePanel", 2f); // Disable the welcome panel after 2 seconds
+
+    }
+    void DisableWelcomePanel()
+    {
+        welcomePanel.SetActive(false);
+    }
+
+
     public void OpenPanel()
     {
         if (panelToOpen != null)
@@ -29,20 +60,20 @@ public class Settings : MonoBehaviour
             panelToOpen.SetActive(true);  // Show the panel
         }
     }
+
     public void OpensettingsPanel()
     {
         if (settingspanel != null)
         {
             settingspanel.SetActive(true);
             settingsMenu.SetActive(true);// Show the panel
-           // SceneManager.LoadScene();
+                                         // SceneManager.LoadScene();
         }
     }
+
     public void EXit()
     {
         settingspanel.SetActive(false);
         panelToOpen.SetActive(false);
     }
-
-
 }

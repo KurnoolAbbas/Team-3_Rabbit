@@ -33,22 +33,22 @@ public class mulLogic : MonoBehaviour
     private float startTime;
     private float endTime;
 
-
     private void Start()
     {
+
         incorrectImage.SetActive(false);
         correctImage.SetActive(false);
         //ClearSavedValues();
         if (PlayerPrefs.HasKey("IsGameSaved"))
         {
             LoadGameState(); // If saved state exists, load it
-            DisplayNextQuestion();
-            startTime = Time.time;
+
+
         }
         DisplayNextQuestion();
         startTime = Time.time;
     }
-    
+
     private void DisplayNextQuestion()
     {
         ResetButtonColors();
@@ -71,7 +71,9 @@ public class mulLogic : MonoBehaviour
             num2 = rng.Next(1, 4);
         } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
 
+
         previousCorrectOption = num1 * num2;
+
         FindObjectOfType<QuestionAudio>().AudioPlayAsync(num1, num2);
 
         int correctAnswer = num1 * num2;
@@ -105,6 +107,7 @@ public class mulLogic : MonoBehaviour
         questionCounterText.text = (currentQuestionIndex + 1) + "/" + totalQuestions;
 
         EnableOptionButtons(); // Ensure buttons are enabled for each question
+
     }
     private void ClearSavedValues()
     {
@@ -169,7 +172,7 @@ public class mulLogic : MonoBehaviour
         return false;
     }
 
-    
+
     public void CheckAnswer(int selectedAnswerIndex)
     {
         if (gameEnded || gamePaused)
@@ -294,10 +297,15 @@ public class mulLogic : MonoBehaviour
 
     public void quit()
     {
-        ClearSavedValues();
-        
+
         SceneManager.LoadScene("main");
+        currentQuestionIndex = 0;
+        correctAnswersCount = 0;
+        gamePaused = false;
+        pauseMenuPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
+
 
     private void DisplayFinalResult()
     {
@@ -350,6 +358,11 @@ public class mulLogic : MonoBehaviour
     {
         currentQuestionIndex = PlayerPrefs.GetInt("CurrentQuestionIndex", 0);
         correctAnswersCount = PlayerPrefs.GetInt("CorrectAnswersCount", 0);
-       
+
     }
+
+
+
+
 }
+
