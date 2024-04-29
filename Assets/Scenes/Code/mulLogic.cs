@@ -20,6 +20,11 @@ public class mulLogic : MonoBehaviour
     public GameObject incorrectImage; // Reference to the GameObject containing the incorrect image
     public AudioSource correctSound; // Assigned correct sound source
     public AudioSource incorrectSound; // Assigned incorrect sound source
+    public GameObject starImage1;
+    public GameObject starImage2;
+    public GameObject starImage3;
+    private int savedNum1;
+    private int savedNum2;
 
 
     private int currentQuestionIndex = 0;
@@ -53,7 +58,7 @@ public class mulLogic : MonoBehaviour
     {
         ResetButtonColors();
         var rng = new SystemRandomSource();
-
+        int num1, num2;
         if (currentQuestionIndex >= totalQuestions)
         {
             // To display the results when the game ends
@@ -64,14 +69,38 @@ public class mulLogic : MonoBehaviour
             return;
         }
 
-        int num1, num2;
-        do
+        int currentQuestionIndex1 = PlayerPrefs.GetInt("CurrentQuestionIndex", 0);
+
+        if (PlayerPrefs.HasKey("IsGameSaved") && savedNum1 != 0 && savedNum2 != 0 && currentQuestionIndex1== currentQuestionIndex)
         {
-            num1 = rng.Next(1, 4);
-            num2 = rng.Next(1, 4);
-        } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption));
+            num1 = savedNum1;
+            num2 = savedNum2;
+            
+            
+        }
+        else
+        {
+            Debug.Log("calling closed saved values");
+            PlayerPrefs.DeleteKey("savedNum1");
+            PlayerPrefs.DeleteKey("savedNum2");
 
+            Debug.Log("savedNum1 " + savedNum1);
 
+            Debug.Log("savedNum2 " + savedNum2);
+            do
+            {
+                num1 = rng.Next(1, 4);
+                num2 = rng.Next(1, 4);
+            } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption && currentQuestionIndex1 != currentQuestionIndex));
+            
+        }
+        savedNum1 = 0;
+        savedNum2 = 0;
+        PlayerPrefs.SetInt("savedNum1", savedNum1);
+        PlayerPrefs.SetInt("savedNum2", savedNum2);
+        Debug.Log("AsavedNum1 " + savedNum1);
+
+        Debug.Log("AsavedNum2 " + savedNum2);
         previousCorrectOption = num1 * num2;
 
         FindObjectOfType<QuestionAudio>().AudioPlayAsync(num1, num2);
@@ -107,13 +136,25 @@ public class mulLogic : MonoBehaviour
         questionCounterText.text = (currentQuestionIndex + 1) + "/" + totalQuestions;
 
         EnableOptionButtons(); // Ensure buttons are enabled for each question
+        savedNum1 = num1;
+        savedNum2 = num2;
+        ClearSavedValues();
+        Debug.Log("savedNum11out " + savedNum1);
+
+        Debug.Log("savedNum22out " + savedNum2);
 
     }
     private void ClearSavedValues()
     {
+        Debug.Log("in clear saved values");
         PlayerPrefs.DeleteKey("IsGameSaved");
         PlayerPrefs.DeleteKey("CurrentQuestionIndex");
         PlayerPrefs.DeleteKey("CorrectAnswersCount");
+        
+        Debug.Log("in clear saved values CurrentQuestionIndex"+ currentQuestionIndex);
+        Debug.Log("in clear saved values CorrectAnswersCount"+ correctAnswersCount);
+        
+
         // Add any other saved values to be cleared
     }
     private void GenerateGrid(int num1, int num2)
@@ -323,6 +364,21 @@ public class mulLogic : MonoBehaviour
         accuracyText.text = "Accuracy: " + roundedAccuracy + "%";
         rateText.text = "Rate: " + roundedRate + "/min";
         wrongText.text = "Wrong: " + wrongAnswers;
+        if (accuracy >= 1 && accuracy <= 50)
+        {
+            starImage1.SetActive(true);
+        }
+        else if (accuracy > 50 && accuracy <= 70)
+        {
+            starImage1.SetActive(true);
+            starImage2.SetActive(true);
+        }
+        else if (accuracy > 70 && accuracy <= 100)
+        {
+            starImage1.SetActive(true);
+            starImage2.SetActive(true);
+            starImage3.SetActive(true);
+        }
 
         GameObject pauseButton = GameObject.Find("PauseButton");
         if (pauseButton != null)
@@ -334,10 +390,12 @@ public class mulLogic : MonoBehaviour
         gameEnded = true;
 
         endGamePanel.SetActive(true);
-        //ClearSavedValues();
-        PlayerPrefs.DeleteKey("IsGameSaved");
+        ClearSavedValues();
+        /*PlayerPrefs.DeleteKey("IsGameSaved");
         PlayerPrefs.DeleteKey("CurrentQuestionIndex");
         PlayerPrefs.DeleteKey("CorrectAnswersCount");
+        PlayerPrefs.DeleteKey("savedNum1");
+        PlayerPrefs.DeleteKey("savedNum2");*/
     }
     public void RestartFromQuestions()
     {
@@ -352,12 +410,17 @@ public class mulLogic : MonoBehaviour
         PlayerPrefs.SetInt("IsGameSaved", 1); // Set a flag to indicate game state is saved
         PlayerPrefs.SetInt("CurrentQuestionIndex", currentQuestionIndex);
         PlayerPrefs.SetInt("CorrectAnswersCount", correctAnswersCount);
+        PlayerPrefs.SetInt("savedNum1", savedNum1);
+        PlayerPrefs.SetInt("savedNum2", savedNum2);
     }
 
     public void LoadGameState()
     {
         currentQuestionIndex = PlayerPrefs.GetInt("CurrentQuestionIndex", 0);
         correctAnswersCount = PlayerPrefs.GetInt("CorrectAnswersCount", 0);
+        savedNum1 = PlayerPrefs.GetInt("savedNum1", 0);
+        savedNum2 = PlayerPrefs.GetInt("savedNum2", 0);
+
 
     }
 
