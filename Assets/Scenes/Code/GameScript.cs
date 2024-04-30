@@ -28,7 +28,7 @@ public static class GameScript
             if (www.result != UnityWebRequest.Result.Success)
             {
                 string errorMessage = $"Failed to update user response: {www.error}";
-                Debug.LogError(errorMessage);
+                //Debug.LogError(errorMessage);
                 onError?.Invoke(errorMessage);
             }
             else
@@ -146,7 +146,7 @@ if (data.games != null)
             if (www.result != UnityWebRequest.Result.Success)
             {
                 string errorMessage = $"Failed to call API: {www.error}";
-                Debug.LogError(errorMessage);
+                //Debug.LogError(errorMessage);
                 onError?.Invoke(errorMessage);
             }
             else
