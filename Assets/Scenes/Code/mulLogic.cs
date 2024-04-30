@@ -38,6 +38,9 @@ public class mulLogic : MonoBehaviour
     private float startTime;
     private float endTime;
 
+    private float time;
+
+
     private void Start()
     {
 
@@ -52,6 +55,8 @@ public class mulLogic : MonoBehaviour
         }
         DisplayNextQuestion();
         startTime = Time.time;
+
+        time=startTime-endTime;
     }
 
     private void DisplayNextQuestion()
@@ -71,12 +76,12 @@ public class mulLogic : MonoBehaviour
 
         int currentQuestionIndex1 = PlayerPrefs.GetInt("CurrentQuestionIndex", 0);
 
-        if (PlayerPrefs.HasKey("IsGameSaved") && savedNum1 != 0 && savedNum2 != 0 && currentQuestionIndex1== currentQuestionIndex)
+        if (PlayerPrefs.HasKey("IsGameSaved") && savedNum1 != 0 && savedNum2 != 0 && currentQuestionIndex1 == currentQuestionIndex)
         {
             num1 = savedNum1;
             num2 = savedNum2;
-            
-            
+
+
         }
         else
         {
@@ -92,7 +97,7 @@ public class mulLogic : MonoBehaviour
                 num1 = rng.Next(1, 4);
                 num2 = rng.Next(1, 4);
             } while (num1 * num2 == previousCorrectOption || (currentQuestionIndex > 0 && currentQuestionIndex % 3 == 0 && num1 * num2 == previousCorrectOption && currentQuestionIndex1 != currentQuestionIndex));
-            
+
         }
         savedNum1 = 0;
         savedNum2 = 0;
@@ -150,10 +155,10 @@ public class mulLogic : MonoBehaviour
         PlayerPrefs.DeleteKey("IsGameSaved");
         PlayerPrefs.DeleteKey("CurrentQuestionIndex");
         PlayerPrefs.DeleteKey("CorrectAnswersCount");
-        
-        Debug.Log("in clear saved values CurrentQuestionIndex"+ currentQuestionIndex);
-        Debug.Log("in clear saved values CorrectAnswersCount"+ correctAnswersCount);
-        
+
+        Debug.Log("in clear saved values CurrentQuestionIndex" + currentQuestionIndex);
+        Debug.Log("in clear saved values CorrectAnswersCount" + correctAnswersCount);
+
 
         // Add any other saved values to be cleared
     }
@@ -214,58 +219,6 @@ public class mulLogic : MonoBehaviour
     }
 
 
-    public void CheckAnswer(int selectedAnswerIndex)
-    {
-        if (gameEnded || gamePaused)
-            return; // If the game is paused or ended, do not process answer
-
-        int correctAnswerIndex = answerPositions[0];
-        bool isCorrect = selectedAnswerIndex == correctAnswerIndex;
-
-        // Loop through each option button
-        for (int i = 0; i < optionButtons.Length; i++)
-        {
-            Button button = optionButtons[i];
-            Text buttonText = button.GetComponentInChildren<Text>();
-
-            // If the current button is the correct answer
-            if (i == correctAnswerIndex)
-            {
-                // Set the color to green if the selected answer is correct, and to red if it's incorrect
-                buttonText.color = isCorrect ? Color.green : Color.red;
-                button.interactable = true;
-            }
-            else
-            {
-                // Hide other buttons
-                button.gameObject.SetActive(false);
-            }
-        }
-
-        // Handle correct and incorrect answer feedback
-        if (!isCorrect)
-        {
-            // If the answer is incorrect
-            correctImage.SetActive(false);
-            result.text = "";
-            result.color = Color.red;
-            incorrectImage.SetActive(true); // Enable the incorrect image GameObject
-            incorrectSound.Play(); // Play incorrect sound effect
-        }
-        else
-        {
-            // If the answer is correct
-            incorrectImage.SetActive(false);
-            result.text = "";
-            result.color = Color.green;
-            correctAnswersCount++;
-            correctImage.SetActive(true); // Enable the correct image GameObject
-            correctSound.Play(); // Play correct sound effect
-        }
-
-        currentQuestionIndex++;
-        StartCoroutine(DisplayNextQuestionAfterDelay());
-    }
 
 
 
@@ -358,12 +311,16 @@ public class mulLogic : MonoBehaviour
         int wrongAnswers = totalQuestions - correctAnswersCount;
 
 
+
+
         int roundedAccuracy = Mathf.CeilToInt(accuracy);
         int roundedRate = Mathf.CeilToInt(rate);
 
         accuracyText.text = "Accuracy: " + roundedAccuracy + "%";
         rateText.text = "Rate: " + roundedRate + "/min";
         wrongText.text = "Wrong: " + wrongAnswers;
+        StartCoroutine(UpdateGameCompletionStats(roundedAccuracy, roundedRate));
+
         if (accuracy >= 1 && accuracy <= 50)
         {
             starImage1.SetActive(true);
@@ -423,8 +380,126 @@ public class mulLogic : MonoBehaviour
 
 
     }
+    void CreateNewGame()
+    {
 
+        string userID = "device_1234_koushik"; // To change in later phase, once profile page is built up.
 
+        Debug.Log("Creating New Game for the userID" + userID);
+        // Call the asynchronous method and pass onSuccess and onError callbacks
+        StartCoroutine(GameScript.CreateNewGame(userID, onSuccess, onError));
+    }
+
+    void onSuccess(string gameID)
+    {
+        Debug.Log("Game Succesfully created with gameId" + gameID);
+        PlayerPrefs.SetString("gameID", gameID);
+    }
+    void onSuccessOfUpdation(bool response)
+    {
+        Debug.LogError(response);
+    }
+
+    void onError(string error)
+    {
+        Debug.LogError(error);
+    }
+
+  public void CheckAnswer(int selectedAnswerIndex)
+{
+    if (gameEnded || gamePaused)
+        return; // If the game is paused or ended, do not process answer
+
+    int correctAnswerIndex = answerPositions[0];
+    bool isCorrect = selectedAnswerIndex == correctAnswerIndex;
+    StartCoroutine(UpdateUserResponseCoroutine(isCorrect));
+
+    // Save game stats
+    // StartCoroutine(SaveGameStats(PlayerPrefs.GetString("gameID"), isCorrect ? 1 : 0, isCorrect ? 0 : 1, false, 0, 0, null, null));
+
+    // Loop through each option button
+    for (int i = 0; i < optionButtons.Length; i++)
+    {
+        Button button = optionButtons[i];
+        Text buttonText = button.GetComponentInChildren<Text>();
+
+        // If the current button is the correct answer
+        if (i == correctAnswerIndex)
+        {
+            // Set the color to green if the selected answer is correct, and to red if it's incorrect
+            buttonText.color = isCorrect ? Color.green : Color.red;
+            button.interactable = true;
+        }
+        else
+        {
+            // Hide other buttons
+            button.gameObject.SetActive(false);
+        }
+    }
+
+    // Handle correct and incorrect answer feedback
+    if (!isCorrect)
+    {
+        // If the answer is incorrect
+        correctImage.SetActive(false);
+        result.text = "";
+        result.color = Color.red;
+        incorrectImage.SetActive(true); // Enable the incorrect image GameObject
+        incorrectSound.Play(); // Play incorrect sound effect
+    }
+    else
+    {
+        // If the answer is correct
+        incorrectImage.SetActive(false);
+        result.text = "";
+        result.color = Color.green;
+        correctAnswersCount++;
+        correctImage.SetActive(true); // Enable the correct image GameObject
+        correctSound.Play(); // Play correct sound effect
+    }
+
+    StartCoroutine(WaitAndLoadNextQuestion(isCorrect));
+}
+
+IEnumerator UpdateUserResponseCoroutine(bool isCorrect)
+{
+    string gameID = PlayerPrefs.GetString("gameID");
+    yield return StartCoroutine(GameScript.UpdateUserResponse(gameID, isCorrect, onSuccessOfUpdation, onError));
+    Debug.Log("User Response Updated Successfully");
+}
+
+private IEnumerator WaitAndLoadNextQuestion(bool isCorrect)
+{
+    yield return new WaitForSeconds(1.0f);
+
+    if (isCorrect)
+    {
+        correctImage.SetActive(false);
+    }
+    else
+    {
+        incorrectImage.SetActive(false);
+    }
+
+    currentQuestionIndex++;
+    PlayerPrefs.SetInt("CurrentQuestionIndex", currentQuestionIndex);
+    DisplayNextQuestion();
+}
+
+private IEnumerator SaveGameStats(string gameId, int noOfCorrectAnswers, int noOfWrongAnswers, bool gameCompleted, double accuracyRate, double completionRate, System.Action<bool> onSuccess, System.Action<string> onError)
+{
+    //yield return StartCoroutine(GameScript.SaveGameStats(gameId, noOfCorrectAnswers, noOfWrongAnswers, gameCompleted, accuracyRate, completionRate, onSuccess, onError));
+
+    // Update game completion stats
+    yield return StartCoroutine(UpdateGameCompletionStats((double)noOfCorrectAnswers / (noOfCorrectAnswers + noOfWrongAnswers) * 100, completionRate));
+}
+
+IEnumerator UpdateGameCompletionStats(double accuracy, double completionRate)
+{
+    string gameID = PlayerPrefs.GetString("gameID");
+    yield return StartCoroutine(GameScript.UpdateGameCompletedStats(gameID, accuracy, completionRate, onSuccessOfUpdation , onError));
+    Debug.Log("Updated in database as game completed");
+}
 
 
 }
