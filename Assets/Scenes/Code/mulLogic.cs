@@ -477,7 +477,7 @@ public class mulLogic : MonoBehaviour
     void onSuccessOfUpdation(bool response)
     {
         Debug.Log(" onSuccessOfUpdation");
-        Debug.LogError(response);
+        //Debug.LogError(response);
     }
 
     void onError(string error)

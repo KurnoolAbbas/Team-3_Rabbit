@@ -103,25 +103,32 @@ public static class GameScript
 
                 ApiResponse response = JsonUtility.FromJson<ApiResponse>(responseBody);
                 ApiResponses data = JsonUtility.FromJson<ApiResponses>(response.Content);
-                 List<Game> gamesList = new List<Game>();
+                List<Game> gamesList = new List<Game>();
 
-if (data.games != null)
-{
-     foreach (Game game in data.games)
-                {
-                    Debug.Log("Name"+game.Name);
-                    Debug.Log("Game ID: " + game.gameId);
-                    Debug.Log("User ID: " + game.userId);
-                    Debug.Log("Correct Answers: " + game.noOfCorrectAnswers);
-                    Debug.Log("Wrong Answers: " + game.noOfWrongAnswers);
-                    Debug.Log("Game Completed: " + game.gameCompleted);
-                    Debug.Log("Accuracy Rate: " + game.accuracyRate);
-                    Debug.Log("Completion Rate: " + game.completionRate);
-                    gamesList.Add(game);
-                }
-}
+                
+                   if (data !=null && data.games != null)
+                   {
+                      foreach (Game game in data.games)
+                      {
+                       Debug.Log("Name"+game.Name);
+                       Debug.Log("Game ID: " + game.gameId);
+                       Debug.Log("User ID: " + game.userId);
+                       Debug.Log("Correct Answers: " + game.noOfCorrectAnswers);
+                       Debug.Log("Wrong Answers: " + game.noOfWrongAnswers);
+                       Debug.Log("Game Completed: " + game.gameCompleted);
+                       Debug.Log("Accuracy Rate: " + game.accuracyRate);
+                       Debug.Log("Completion Rate: " + game.completionRate);
+                       gamesList.Add(game);
+                      }
+                   }
+                   else
+                   {
+                     Debug.LogWarning("Game object is null.");
+                   }
+                
+                
 
-               onSuccess?.Invoke(gamesList);
+                onSuccess?.Invoke(gamesList);
             }
         }
     }
