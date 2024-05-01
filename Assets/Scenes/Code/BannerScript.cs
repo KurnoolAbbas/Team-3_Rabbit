@@ -45,7 +45,7 @@ public class BannerScript : MonoBehaviour
         }
 
         AdSize adSize = AdSize.Banner;
-        _bannerView = new BannerView(_adUnitId, adSize, 50, 720);
+        _bannerView = new BannerView(_adUnitId, adSize,AdPosition.Bottom);
     }
 
     public void LoadAd()
