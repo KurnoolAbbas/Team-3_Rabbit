@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571398, b: 0.30692294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1988,8 +1988,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -99.764, y: -804.78}
-  m_SizeDelta: {x: 273.345, y: 354.5616}
+  m_AnchoredPosition: {x: 350.58, y: 19}
+  m_SizeDelta: {x: 284.02, y: 459.202}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &675899319
 MonoBehaviour:
@@ -2011,7 +2011,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 773005561, guid: 0c7d9701fc772074dbe2898930f8067f, type: 3}
+  m_Sprite: {fileID: 853394832, guid: 8fb023c9b7de84e229196212eee382f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3756,7 +3756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.1406555, y: -7.076233}
+  m_AnchoredPosition: {x: -8.140625, y: -7.076172}
   m_SizeDelta: {x: -0.00048828, y: -0.0010071}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1393716111
@@ -4365,6 +4365,7 @@ GameObject:
   - component: {fileID: 1644522680}
   - component: {fileID: 1644522681}
   - component: {fileID: 1644522682}
+  - component: {fileID: 1644522683}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -4431,6 +4432,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8be690d6abe2e74787a3ddfcb6e187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1644522683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644522678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d9460444cef6e4396457ed2e8139c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundClip: {fileID: 8300000, guid: 69546bd277dd2424aadd5dc12137eb29, type: 3}
 --- !u!1 &1790946845
 GameObject:
   m_ObjectHideFlags: 0
@@ -5178,7 +5192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.784668, y: -7.076233}
+  m_AnchoredPosition: {x: 9.784668, y: -7.076172}
   m_SizeDelta: {x: 35.85, y: 27.4659}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2016889991
@@ -5431,18 +5445,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2060194446}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1644522681}
         m_TargetAssemblyTypeName: mulLogic, Assembly-CSharp
         m_MethodName: SaveGameState
@@ -5458,6 +5460,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2060194445}
         m_TargetAssemblyTypeName: SceeneLoader, Assembly-CSharp
         m_MethodName: LoadSceneOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2060194446}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5536,7 +5550,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 158
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
