@@ -30,6 +30,7 @@ public class BannerScript : MonoBehaviour
         {
             // This callback is called once the MobileAds SDK is initialized.
             CreateBannerView();
+            //enableAdds()
             EnableAds();
         });
     }
