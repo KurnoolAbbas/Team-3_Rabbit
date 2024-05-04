@@ -6,7 +6,7 @@ using MathNet.Numerics.Random;
 
 public class mulLogic : MonoBehaviour
 {
-    public Text lastText;
+    
     public Text result;
     public Text questionText;
     public Button[] optionButtons;
@@ -68,7 +68,7 @@ public class mulLogic : MonoBehaviour
         {
             // To display the results when the game ends
             pauseMenuPanel.SetActive(false);
-            lastText.text = "";
+           
             DisplayFinalResult();
             DisableOptionButtons();
             return;

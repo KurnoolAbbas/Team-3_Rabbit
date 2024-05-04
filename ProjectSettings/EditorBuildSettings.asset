@@ -24,6 +24,8 @@ EditorBuildSettings:
     path: Assets/Scenes/TableSceneSingle.unity
     guid: 4be1b0eb5d19da84fbbb6135db11ddd4
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
+      guid: 9bb2cb77d29549c45826914cd0ba7850, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 71e3a696d5b864a41bc111a2f768c157,
       type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
