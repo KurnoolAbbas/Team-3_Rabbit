@@ -20,7 +20,7 @@ public class logo : Image
     }
     
 
-    void Start()
+    protected override void Start()
     {
         StartCoroutine(LoadSceneAfterDelay());
     }

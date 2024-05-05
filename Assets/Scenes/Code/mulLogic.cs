@@ -57,6 +57,8 @@ public class mulLogic : MonoBehaviour
         startTime = Time.time;
 
         time=startTime-endTime;
+
+        PlayerPrefs.SetFloat("time", time);
     }
 
     private void DisplayNextQuestion()
@@ -496,9 +498,7 @@ public class mulLogic : MonoBehaviour
 
     private IEnumerator SaveGameStats(string gameId, int noOfCorrectAnswers, int noOfWrongAnswers, bool gameCompleted, double accuracyRate, double completionRate, System.Action<bool> onSuccess, System.Action<string> onError)
     {
-      //yield return StartCoroutine(GameScript.SaveGameStats(gameId, noOfCorrectAnswers, noOfWrongAnswers, gameCompleted, accuracyRate, completionRate, onSuccess, onError));
-
-      // Update game completion stats
+      
       yield return StartCoroutine(UpdateGameCompletionStats((double)noOfCorrectAnswers / (noOfCorrectAnswers + noOfWrongAnswers) * 100, completionRate));
     }
 

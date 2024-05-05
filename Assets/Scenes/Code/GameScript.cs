@@ -78,7 +78,7 @@ public static class GameScript
     {
         Debug.Log("Calling Get User Score");
         string endpoint = $"getHighestGameStats";
-        string queryParams = $"?{azureFunctionAuthenticationParams}&userID={userId}";
+        string queryParams = $"?{azureFunctionAuthenticationParams}&usessrID={userId}";
 
         string url = $"{baseAzureFunctionUrl}{queryParams}";
 

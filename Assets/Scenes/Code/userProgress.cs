@@ -31,8 +31,9 @@ public class UserProgress : MonoBehaviour
     // Function to set text values
     void SetTextValues(Text[] headings, string newName, string newGrade, int newScore, float newTime)
     {
+        newTime=PlayerPrefs.GetFloat("time",0);
 
-
+        Debug.Log("time is "+newTime);
         headings[0].text = newName;
         headings[1].text = newScore.ToString();
         headings[2].text = newTime.ToString("F2"); // Format time to 2 decimal places
@@ -52,6 +53,8 @@ public class UserProgress : MonoBehaviour
         }
 
         headings[3].text = grade;
+
+
         
 
     }
@@ -78,7 +81,7 @@ public class UserProgress : MonoBehaviour
                     Debug.Log("Accuracy Rate: " + game.accuracyRate);
                     Debug.Log("Completion Rate: " + game.completionRate);
 
-                    SetTextValues(heading1, game.userId, "A", game.noOfCorrectAnswers, (float)game.accuracyRate);
+                    SetTextValues(heading1, game.userId, " ", game.noOfCorrectAnswers, (float)game.accuracyRate);
 
                 }
 
