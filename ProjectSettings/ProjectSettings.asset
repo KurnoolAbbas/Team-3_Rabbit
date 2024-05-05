@@ -140,7 +140,14 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 1.0.2
+<<<<<<< Updated upstream
   preloadedAssets: []
+=======
+  preloadedAssets:
+  - {fileID: -875496973089248303, guid: 71e3a696d5b864a41bc111a2f768c157, type: 2}
+  - {fileID: 11400000, guid: 3e24939e20775b2409d72f49a0b9060e, type: 2}
+  - {fileID: 11400000, guid: 9bb2cb77d29549c45826914cd0ba7850, type: 2}
+>>>>>>> Stashed changes
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -253,10 +260,10 @@ PlayerSettings:
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   useCustomMainManifest: 0
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
   useCustomGradleSettingsTemplate: 0
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 1
@@ -940,11 +947,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 5ac655da-757a-4f34-b622-6b9fe4618ab8
+  cloudProjectId: 230fb5df-4a51-4a93-9f90-aa6a53bafd5e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Team-3_Rabbit
-  organizationId: mohan_31
+  projectName: My project 31
+  organizationId: arahmanace
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

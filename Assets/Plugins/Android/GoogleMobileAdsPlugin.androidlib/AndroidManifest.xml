@@ -9,6 +9,12 @@ required for displaying ads.
     android:versionName="1.0"
     android:versionCode="1">
   <application>
+<<<<<<< Updated upstream
     <uses-library android:required="false" android:name="org.apache.http.legacy"/>
+=======
+    <uses-library android:required="false" android:name="org.apache.http.legacy" />
+    <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713" />
+    <meta-data android:name="com.google.unity.ads.UNITY_VERSION" android:value="2022.3.19f1" />
+>>>>>>> Stashed changes
   </application>
 </manifest>

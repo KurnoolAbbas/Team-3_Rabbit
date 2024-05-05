@@ -331,7 +331,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a3a6a28c6a80a46adde9b4e01eeb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Settings: {fileID: 11400000, guid: 5705c3e2761f11a49a89f3e8e34c6d6b, type: 2}
+=======
+  Settings: {fileID: 11400000, guid: e33f6552642d3ee428567eb80cbc7e2f, type: 2}
+>>>>>>> Stashed changes
 --- !u!1 &1039379848
 GameObject:
   m_ObjectHideFlags: 0
