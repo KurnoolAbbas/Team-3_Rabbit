@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using System;
 
 public class UserProgress : MonoBehaviour
 {
@@ -14,62 +15,56 @@ public class UserProgress : MonoBehaviour
     public Text[] heading4;
 
     public Text[] heading5;
+    private String name1;
+    //private int accuracyRate;
+    private double completionRate;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        // foreach (Text heading in heading1)
-        // {
-        //     heading.gameObject.SetActive(true);
-        // }
-
-        // Set initial values
         StartCoroutine(LoadUserData());
 
     }
 
     // Function to set text values
-    void SetTextValues(Text[] headings, string newName, string newGrade, int newScore, float newTime)
+    void SetTextValues(Text[] headings, string newName, string newGrade, int newScore, float accuracy)
     {
-        newTime=PlayerPrefs.GetFloat("time",0);
-
-        Debug.Log("time is "+newTime);
         headings[0].text = newName;
-        headings[1].text = newScore.ToString();
-        headings[2].text = newTime.ToString("F2"); // Format time to 2 decimal places
-
-        string grade;
-        if (newScore == 5)
-        {
-            grade = "A";
-        }
-        else if (newScore == 3 || newScore == 4)
-        {
-            grade = "B";
-        }
-        else
-        {
-            grade = "C";
-        }
-
-        headings[3].text = grade;
-
-
+        String star = "";
+       
+        int accuracyRate = (int)accuracy;
+        headings[3].text = accuracyRate.ToString();
+        float correctAnswer= (accuracyRate*5) /100;
         
+        headings[1].text = ((int)(correctAnswer)).ToString(); ;
+
+        if (accuracyRate >= 1 && accuracyRate <= 50)
+        {
+            star = "C";
+        }
+        else if (accuracyRate > 50 && accuracyRate <= 70)
+        {
+            star = "B";
+        }
+        else if (accuracyRate > 70 && accuracyRate <= 100)
+        {
+            star = "A";
+        }
+        headings[2].text = star;
 
     }
-
+    
 
     // Example function to update values
     IEnumerator LoadUserData()
     {
-        // string userID = PlayerPrefs.GetString("userID");
+     
         string userID = PlayerPrefs.GetString("userID");
 
         yield return StartCoroutine(GameScript.GetUserHighestScore(userID,
             onSuccess: (success) =>
             {
-                int index = 0;
                 foreach (var game in success)
                 {
                     Debug.Log("Name :" + game.Name);
@@ -82,7 +77,7 @@ public class UserProgress : MonoBehaviour
                     Debug.Log("Completion Rate: " + game.completionRate);
 
                     SetTextValues(heading1, game.userId, " ", game.noOfCorrectAnswers, (float)game.accuracyRate);
-
+              
                 }
 
 
@@ -94,11 +89,10 @@ public class UserProgress : MonoBehaviour
 
     }
 
+    
 
     public void Exit()
     {
-
-
         SceneManager.LoadScene("main");
     }
 

@@ -311,9 +311,7 @@ public class mulLogic : MonoBehaviour
         endTime = Time.time;
         float rate = totalQuestions / (endTime - startTime) * 60;
         int wrongAnswers = totalQuestions - correctAnswersCount;
-
-
-
+        PlayerPrefs.SetInt("mainScore", correctAnswersCount);
 
         int roundedAccuracy = Mathf.CeilToInt(accuracy);
         int roundedRate = Mathf.CeilToInt(rate);
