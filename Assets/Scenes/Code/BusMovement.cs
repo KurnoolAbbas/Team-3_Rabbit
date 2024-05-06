@@ -6,9 +6,16 @@ using UnityEngine.UI;
 public class BusMovement : MonoBehaviour
 {
     [SerializeField] private RawImage _img;
-    [SerializeField] private float _x, _y;
+    [SerializeField] private float _xSpeed;
+    [SerializeField] private float _ySpeed;
+
     void Update()
     {
-        _img.uvRect = new Rect(_img.uvRect.position + new Vector2(_x, _y) * Time.deltaTime, _img.uvRect.size);
+        // Calculate the new UV position based on time and speed
+        float newX = _img.uvRect.x + _xSpeed * Time.deltaTime;
+        float newY = _img.uvRect.y + _ySpeed * Time.deltaTime;
+
+        // Update the UV rectangle of the RawImage to move the texture
+        _img.uvRect = new Rect(newX, newY, _img.uvRect.width, _img.uvRect.height);
     }
 }
