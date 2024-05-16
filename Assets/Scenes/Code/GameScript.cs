@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 public static class GameScript
 {
-    public static string baseAzureFunctionUrl = "https://team3-rabbitdev.azurewebsites.net/api/game/";
-   public static string azureFunctionAuthenticationParams = "code=H9tVaApfp3EDkh-_4Lmb0LXKk-B5hOXCKoSY17q-DyshAzFu336aAQ==&clientId=default";
+    public static string baseAzureFunctionUrl = "https://team12.azurewebsites.net/api/game/";
+    public static string azureFunctionAuthenticationParams = "code=VdxxDNNDxHgb-v0q8TcXSLV6x9W9TGYzyTxCAOcNpffNAzFuZ0O47g==&clientId=default";
 
 
     public static IEnumerator UpdateUserResponse(string gameID, bool validUserResponse, System.Action<bool> onSuccess, System.Action<string> onError)
@@ -44,36 +44,7 @@ public static class GameScript
 
 
 
-    // public static IEnumerator UpdateGameCompletedStats(string gameId, double accuracy, double completion, System.Action<bool> onSuccess, System.Action<string> onError)
-    // {
-    //     string endpoint = $"{gameId}/complete";
-    //     string queryParams = $"?{azureFunctionAuthenticationParams}&accuracy={accuracy}&completion={completion}";
-    //     string url = $"{baseAzureFunctionUrl}{endpoint}{queryParams}";
-
-
-    //     Debug.Log($"Updating game completed stats: {url}");
-
-
-    //     using (UnityWebRequest www = UnityWebRequest.Post(url, new WWWForm()))
-    //     {
-    //         yield return www.SendWebRequest();
-
-
-    //         if (www.result != UnityWebRequest.Result.Success)
-    //         {
-    //             string errorMessage = $"Failed to call API: {www.error}";
-    //             Debug.LogError(errorMessage);
-    //             onError?.Invoke(errorMessage);
-    //         }
-    //         else
-    //         {
-    //             Debug.Log("API call successful");
-    //             onSuccess?.Invoke(true);
-    //         }
-    //     }
-    // }
-
-
+   
     public static IEnumerator GetUserHighestScore(string userId, System.Action<List<Game>> onSuccess, System.Action<string> onError)
     {
         Debug.Log("Calling Get User Score");
@@ -105,35 +76,35 @@ public static class GameScript
                 ApiResponses data = JsonUtility.FromJson<ApiResponses>(response.Content);
                 List<Game> gamesList = new List<Game>();
 
-                
-                   if (data !=null && data.games != null)
-                   {
-                      foreach (Game game in data.games)
-                      {
-                       Debug.Log("Name"+game.Name);
-                       Debug.Log("Game ID: " + game.gameId);
-                       Debug.Log("User ID: " + game.userId);
-                       Debug.Log("Correct Answers: " + game.noOfCorrectAnswers);
-                       Debug.Log("Wrong Answers: " + game.noOfWrongAnswers);
-                       Debug.Log("Game Completed: " + game.gameCompleted);
-                       Debug.Log("Accuracy Rate: " + game.accuracyRate);
-                       Debug.Log("Completion Rate: " + game.completionRate);
-                       gamesList.Add(game);
-                      }
-                   }
-                   else
-                   {
-                     Debug.LogWarning("Game object is null.");
-                   }
-                
-                
+
+                if (data != null && data.games != null)
+                {
+                    foreach (Game game in data.games)
+                    {
+                        Debug.Log("Name" + game.Name);
+                        Debug.Log("Game ID: " + game.gameId);
+                        Debug.Log("User ID: " + game.userId);
+                        Debug.Log("Correct Answers: " + game.noOfCorrectAnswers);
+                        Debug.Log("Wrong Answers: " + game.noOfWrongAnswers);
+                        Debug.Log("Game Completed: " + game.gameCompleted);
+                        Debug.Log("Accuracy Rate: " + game.accuracyRate);
+                        Debug.Log("Completion Rate: " + game.completionRate);
+                        gamesList.Add(game);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Game object is null.");
+                }
+
+
 
                 onSuccess?.Invoke(gamesList);
             }
         }
     }
 
- public static IEnumerator UpdateGameCompletedStats(string gameId, double accuracy, double completion, System.Action<bool> onSuccess, System.Action<string> onError)
+    public static IEnumerator UpdateGameCompletedStats(string gameId, double accuracy, double completion, System.Action<bool> onSuccess, System.Action<string> onError)
     {
         string endpoint = $"{gameId}/complete";
         string queryParams = $"?{azureFunctionAuthenticationParams}&accuracy={accuracy}&completion={completion}";
@@ -145,7 +116,7 @@ public static class GameScript
 
         byte[] postData = System.Text.Encoding.UTF8.GetBytes("");
 
-    using (UnityWebRequest www = UnityWebRequest.Put(url, postData))
+        using (UnityWebRequest www = UnityWebRequest.Put(url, postData))
         {
             yield return www.SendWebRequest();
 
