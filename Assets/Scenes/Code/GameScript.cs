@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 public static class GameScript
 {
-    
     public static string baseAzureFunctionUrl = "https://team3-rabbitdev.azurewebsites.net/api/game/";
     public static string azureFunctionAuthenticationParams = "code=H9tVaApfp3EDkh-_4Lmb0LXKk-B5hOXCKoSY17q-DyshAzFu336aAQ==&clientId=default";
+   
 
 
 
@@ -46,7 +46,9 @@ public static class GameScript
 
 
 
-   
+    
+
+
     public static IEnumerator GetUserHighestScore(string userId, System.Action<List<Game>> onSuccess, System.Action<string> onError)
     {
         Debug.Log("Calling Get User Score");
@@ -155,7 +157,8 @@ public static class GameScript
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("Failed to create game: " + www.error);
+            // Debug.LogError("Failed to create game: " + www.error);
+            Debug.Log("Failed to create game");
         }
         else
         {
@@ -172,7 +175,7 @@ public static class GameScript
             catch (System.Exception ex)
             {
                 string errorMessage = "Error parsing JSON data: " + ex.Message;
-                Debug.LogError(errorMessage);
+                //Debug.LogError(errorMessage);
                 onError?.Invoke(errorMessage);
             }
         }

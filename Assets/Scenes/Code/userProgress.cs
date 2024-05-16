@@ -83,7 +83,8 @@ public class UserProgress : MonoBehaviour
             },
             onError: (error) =>
             {
-                Debug.LogError("Failed to update game completed stats: " + error);
+               // Debug.LogError("Failed to update game completed stats: " + error);
+                Debug.Log("Failed to update game completed stats");
             }));
 
     }

@@ -70,7 +70,7 @@ public class Settings : MonoBehaviour
 
     void OnError(string error)
     {
-        Debug.LogError(error);
+        Debug.Log(error);
     }
 
     public void OpenPanel()
