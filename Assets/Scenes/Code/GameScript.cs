@@ -7,8 +7,10 @@ using System.Collections.Generic;
 public static class GameScript
 {
     public static string baseAzureFunctionUrl = "https://team3-rabbitdev.azurewebsites.net/api/game/";
-    public static string azureFunctionAuthenticationParams = "code=H9tVaApfp3EDkh-_4Lmb0LXKk-B5hOXCKoSY17q-DyshAzFu336aAQ==&clientId=default";
-   
+    
+    public static string azureFunctionAuthenticationParams = "";
+
+
 
 
 
