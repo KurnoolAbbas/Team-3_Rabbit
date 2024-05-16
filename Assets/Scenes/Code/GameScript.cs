@@ -6,8 +6,10 @@ using System.Collections.Generic;
 
 public static class GameScript
 {
-    public static string baseAzureFunctionUrl = "https://team12.azurewebsites.net/api/game/";
-    public static string azureFunctionAuthenticationParams = "code=VdxxDNNDxHgb-v0q8TcXSLV6x9W9TGYzyTxCAOcNpffNAzFuZ0O47g==&clientId=default";
+    
+    public static string baseAzureFunctionUrl = "https://team3-rabbitdev.azurewebsites.net/api/game/";
+    public static string azureFunctionAuthenticationParams = "code=H9tVaApfp3EDkh-_4Lmb0LXKk-B5hOXCKoSY17q-DyshAzFu336aAQ==&clientId=default";
+
 
 
     public static IEnumerator UpdateUserResponse(string gameID, bool validUserResponse, System.Action<bool> onSuccess, System.Action<string> onError)
